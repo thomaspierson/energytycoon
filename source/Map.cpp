@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "Pole.h"
 #include "Company.h"
-#include "InstancedGeometryManager.h"
+//#include "InstancedGeometryManager.h"
 #include "City.h"
 #include "Street.h"
 #include "River.h"
@@ -48,7 +48,7 @@ Map::Map(std::string pMapPrefix, Ogre::SceneManager* pSceneManager)
 	EventHandler::raiseEvent(eSetLoadingStatus, new EventArg<std::string>(
 		StrLoc::get()->LoadingPopulace()));
 
-	mMapXML.reset(new TiXmlDocument((cDataDirPre + "maps/" + pMapPrefix + "_data.xml").c_str()));
+	mMapXML.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/" + pMapPrefix + "_data.xml").c_str()));
 	mMapXML->LoadFile(TIXML_ENCODING_UTF8);
 	processXML();
 
@@ -100,7 +100,7 @@ void Map::processXML(void)
 			getPointAttributeXML(node, lX, lY);
 
 			std::string lSize = node->ToElement()->Attribute("size");
-			Ogre::UTFString lName = node->ToElement()->GetText();
+			Ogre::String lName = node->ToElement()->GetText();
 
 			mCities.push_back(boost::shared_ptr<City>(
 				new City(Ogre::Vector2(lX * mScaleXData, lY * mScaleZData),
@@ -512,7 +512,7 @@ void Map::evaluateScaleFactors(std::string pMapPrefix)
 	boost::shared_ptr< TiXmlDocument > lTerrainConfig;
 	TiXmlNode* rootNode;
 
-	lTerrainConfig.reset(new TiXmlDocument((cDataDirPre + "maps/" 
+	lTerrainConfig.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/"
 		+ pMapPrefix + "_terrain.xml").c_str()));
 	lTerrainConfig->LoadFile(TIXML_ENCODING_UTF8);
 

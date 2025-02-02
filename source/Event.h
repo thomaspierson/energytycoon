@@ -1,6 +1,8 @@
 ﻿#ifndef EVENT_H
 #define EVENT_H
 
+#include "StdAfx.h"
+
 /*-----------------------------------------------------------------------------------------------*/
 
 //! Game events
@@ -105,8 +107,7 @@ public:
 
 private:
 
-  static std::multimap<const eEventType,
-    boost::function<void (EventData*)> > mCallbacks; //!< All the callback assignments
+  static std::multimap<const eEventType, boost::function<void (EventData*)> > mCallbacks; //!< All the callback assignments
 };
 
 //! Derive from this and add callbacks to mRegisteredCallbacks if callback assignments
@@ -123,8 +124,7 @@ public:
 
 protected:
 
-  std::vector<std::multimap<const eEventType,
-    boost::function<void (EventData*)> >::iterator> mRegisteredCallbacks; //!< Callbacks in this instance
+  std::vector<std::multimap<const eEventType, boost::function<void (EventData*)> >::iterator> mRegisteredCallbacks; //!< Callbacks in this instance
 };
 
 //! Shortcut for registering callbacks

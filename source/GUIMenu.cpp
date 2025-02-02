@@ -18,7 +18,7 @@ void GUI::menuResumeGamePressed(MyGUI::WidgetPtr _widget)
 
 void GUI::menuExitPressed(MyGUI::WidgetPtr _widget)
 {
-	MyGUI::MessagePtr lQuestionExit = MyGUI::Message::createMessageBox("Message",
+    MyGUI::Message* lQuestionExit = MyGUI::Message::createMessageBox(
 		StrLoc::get()->GameTitle(), StrLoc::get()->WantToQuit(),
 		MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No |
 		MyGUI::MessageBoxStyle::IconQuest);
@@ -27,7 +27,7 @@ void GUI::menuExitPressed(MyGUI::WidgetPtr _widget)
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::questionExit(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style)
+void GUI::questionExit(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style)
 {
 	if(_style == MyGUI::MessageBoxStyle::Yes)
 		exit(0);
@@ -71,7 +71,7 @@ void GUI::menuCreditsPressed(MyGUI::WidgetPtr _widget)
 
 	mGUI->findWidget<MyGUI::StaticText>("CreditsText")->setCaption(StrLoc::get()->CreditsText());
 
-	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
 
 	mGUI->findWidget<MyGUI::Button>("Back")->setCaption(StrLoc::get()->MainMenuBack());
@@ -108,16 +108,16 @@ void GUI::menuOptionsPressed(MyGUI::WidgetPtr _widget)
 	mCurrentLayout = MyGUI::LayoutManager::getInstance().load("options_" + StrLoc::get()->LanguageCode() + ".layout");
 
 	mGUI->findWidget<MyGUI::Widget>("OptionsWidget")->setPosition(
-		(mGUI->getViewWidth()/2) 
+		(mGUI->getViewWidth()/2)
     - (mGUI->findWidget<MyGUI::Widget>("OptionsWidget")->getWidth()/2),
-		mGUI->getViewHeight()/2 
+		mGUI->getViewHeight()/2
     - mGUI->findWidget<MyGUI::Widget>("OptionsWidget")->getHeight()/2);
 
 	MyGUI::StaticImagePtr lBackground = mGUI->findWidget<MyGUI::StaticImage>("Background");
 	lBackground->setImageTexture(cBackgrounds[getCurrentAspectRatio()]);
 	lBackground->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
 
-	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
 
 	Ogre::ConfigOptionMap lConfigOptions = mRenderSystem->getConfigOptions();
@@ -157,22 +157,22 @@ void GUI::menuOptionsPressed(MyGUI::WidgetPtr _widget)
 
 	mGUI->findWidget<MyGUI::ComboBox>("ResolutionCombo")->setEditStatic(true);
 
-	mGUI->findWidget<MyGUI::Button>("OKButton")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("OKButton")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
-	mGUI->findWidget<MyGUI::Button>("16BitRadio")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("16BitRadio")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
-	mGUI->findWidget<MyGUI::Button>("32BitRadio")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("32BitRadio")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
-	mGUI->findWidget<MyGUI::Button>("HighRadio")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("HighRadio")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
-	mGUI->findWidget<MyGUI::Button>("NormalRadio")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("NormalRadio")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
-	mGUI->findWidget<MyGUI::Button>("FullscreenCheck")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("FullscreenCheck")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::optionsButtonPressed);
 
 	mGUI->findWidget<MyGUI::Button>("FullscreenCheck")->
@@ -239,7 +239,7 @@ void GUI::optionsButtonPressed(MyGUI::WidgetPtr _widget)
 
 		Ogre::ConfigOptionMap lConfigOptions = mRenderSystem->getConfigOptions();
 
-		if(   (lConfigOptions["Video Mode"].currentValue != mNewResolution) 
+		if(   (lConfigOptions["Video Mode"].currentValue != mNewResolution)
 			|| (lConfigOptions["Full Screen"].currentValue != mNewFullscreen)
 			|| (mNewQuality != mOldGraphicsQuality)) {
 			// store if user comes back to settings menu
@@ -255,21 +255,22 @@ void GUI::optionsButtonPressed(MyGUI::WidgetPtr _widget)
 			lConfigFile.close();
 
 			int lWidth = toNumber<int>(mNewResolution.substr(0, mNewResolution.find("x") - 1));
-			int lHeight = toNumber<int>(mNewResolution.substr(mNewResolution.find("x") + 1, 
+			int lHeight = toNumber<int>(mNewResolution.substr(mNewResolution.find("x") + 1,
 				mNewResolution.find("@")-mNewResolution.find("x")));
 			bool lFullscreen = (mNewFullscreen == "Yes") ? true : false;
 
-			if(lFullscreen) {
-				mGUI->getRenderWindow()->setFullscreen(true, lWidth, lHeight);
+            auto& renderManager = MyGUI::OgreRenderManager::getInstance();
+            if(lFullscreen) {
+                renderManager.getRenderWindow()->setFullscreen(true, lWidth, lHeight);
 			} else {
-				mGUI->getRenderWindow()->setFullscreen(false, lWidth-8, lHeight-28);
+                renderManager.getRenderWindow()->setFullscreen(false, lWidth-8, lHeight-28);
 #ifdef WIN32
 				int lDesktopWidth = GetSystemMetrics(SM_CXSCREEN);
 				int lDesktopHeight = GetSystemMetrics(SM_CYSCREEN);
 
-				mGUI->getRenderWindow()->reposition((lDesktopWidth-lWidth)/2,(lDesktopHeight-lHeight)/2);
+                renderManager.getRenderWindow()->reposition((lDesktopWidth-lWidth)/2,(lDesktopHeight-lHeight)/2);
 #else
-        mGUI->getRenderWindow()->reposition(0,0);
+        renderManager.getRenderWindow()->reposition(0,0);
 #endif
 			}
 
@@ -306,36 +307,29 @@ void GUI::optionsButtonPressed(MyGUI::WidgetPtr _widget)
 
 void GUI::menuLoadPressed(MyGUI::WidgetPtr _widget)
 {
-  // fade out hack
-  unsigned long lStartTime = mRoot->getTimer()->getMilliseconds();
-  unsigned long lPassedTime = 0;
 
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("MainMenuWidget")->setAlpha(1.0 - (float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
+    mGUI->findWidget<MyGUI::Widget>("MainMenuWidget")->setAlpha(1.0);
 
 	MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
 
-	mCurrentLayout = MyGUI::LayoutManager::getInstance().load("load_" + StrLoc::get()->LanguageCode() + ".layout");
+    mCurrentLayout = MyGUI::LayoutManager::getInstance().loadLayout("load_" + StrLoc::get()->LanguageCode() + ".layout");
 
 	mGUI->findWidget<MyGUI::Widget>("LoadWidget")->setPosition(
-		(mGUI->getViewWidth()/2) - 
+		(mGUI->getViewWidth()/2) -
 		(mGUI->findWidget<MyGUI::Widget>("LoadWidget")->getWidth()/2),
-		mGUI->getViewHeight()/2 - 
+		mGUI->getViewHeight()/2 -
 		mGUI->findWidget<MyGUI::Widget>("LoadWidget")->getHeight()/2);
 
 	MyGUI::StaticImagePtr lBackground = mGUI->findWidget<MyGUI::StaticImage>("Background");
 	lBackground->setImageTexture(cBackgrounds[getCurrentAspectRatio()]);
 	lBackground->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
 
-	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
 
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
- 
+
 	std::vector<std::string> lSavedGames = findFilesInDirectory(lSaveGameDirectory + "saved_games");
 
 	for(unsigned int i = 0; i < lSavedGames.size(); i++) {
@@ -343,10 +337,10 @@ std::string lUserHomeDirectory(getenv("HOME"));
 			mGUI->findWidget<MyGUI::List>("LoadList")->addItem(lSavedGames[i]);
 	}
 
-	mGUI->findWidget<MyGUI::Button>("LoadButton")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::loadButtonPressed);
-	mGUI->findWidget<MyGUI::List>("LoadList")->eventListChangePosition = 
-		MyGUI::newDelegate(this, &GUI::loadListPressed);
+    mGUI->findWidget<MyGUI::Button>("LoadButton")->eventMouseButtonClick +=
+        MyGUI::newDelegate(this, &GUI::loadButtonPressed);
+    mGUI->findWidget<MyGUI::List>("LoadList")->eventListChangePosition +=
+        MyGUI::newDelegate(this, &GUI::loadListPressed);
 
 	mGUI->findWidget<MyGUI::Button>("LoadButton")
     ->setCaption(StrLoc::get()->LoadMenuLoad());
@@ -354,16 +348,6 @@ std::string lUserHomeDirectory(getenv("HOME"));
     ->setCaption(StrLoc::get()->MainMenuBack());
 	mGUI->findWidget<MyGUI::StaticText>("SaveGameInfo")
     ->setCaption(StrLoc::get()->NoSavegameSelected());
-
-  // fade in hack
-  lStartTime = mRoot->getTimer()->getMilliseconds();
-  lPassedTime = 0;
-
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("LoadWidget")->setAlpha((float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
 
   mGUI->findWidget<MyGUI::Widget>("LoadWidget")->setAlpha(1.0);
 }
@@ -377,28 +361,28 @@ void GUI::loadButtonPressed(MyGUI::WidgetPtr _widget)
 			StartData lStartData;
 			lStartData.mSerialized = true;
 			lStartData.mNew = false;
-			lStartData.mSerializedFile = 
+			lStartData.mSerializedFile =
 				mGUI->findWidget<MyGUI::List>("LoadList")->getItemNameAt(
 				mGUI->findWidget<MyGUI::List>("LoadList")->getIndexSelected());
 
 			MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
-			mCurrentLayout = MyGUI::LayoutManager::getInstance().load("loading.layout");
+            mCurrentLayout = MyGUI::LayoutManager::getInstance().load("loading.layout");
 			mGUI->findWidget<MyGUI::StaticImage>("Background")
         ->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
 			mGUI->findWidget<MyGUI::StaticImage>("Background")
         ->setImageTexture(cBackgrounds[getCurrentAspectRatio()]);
 
-			MyGUI::PointerManager::getInstance().setVisible(false);
+            MyGUI::PointerManager::getInstance().setVisible(true);
 			mLoading = true;
 
 			EventHandler::raiseEvent(eGamestateChangeGUI);
 			EventHandler::raiseEvent(eLoadGame, new EventArg<StartData>(lStartData));
 		} else {
 			if(mAskForRestart) {
-				MyGUI::MessagePtr lQuestionExit = MyGUI::Message::createMessageBox(
-					"Message", StrLoc::get()->GameTitle(),
+                MyGUI::Message* lQuestionExit = MyGUI::Message::createMessageBox(
+                    StrLoc::get()->GameTitle(),
 					StrLoc::get()->LoadMenuQuestion(),
-					MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No 
+					MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No
 					| MyGUI::MessageBoxStyle::IconQuest);
 				lQuestionExit->eventMessageBoxResult = MyGUI::newDelegate(this, &GUI::unloadAndLoad);
 			} else {
@@ -406,14 +390,14 @@ void GUI::loadButtonPressed(MyGUI::WidgetPtr _widget)
 			}
 		}
 	} else {
-		MyGUI::Message::createMessageBox("Message", StrLoc::get()->GameTitle(),
+        MyGUI::Message::createMessageBox(StrLoc::get()->GameTitle(),
 			StrLoc::get()->LoadMenuSelect());
 	}
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::loadListPressed(MyGUI::ListPtr _widget, unsigned int _index)
+void GUI::loadListPressed(MyGUI::List* _sender, size_t _index)
 {
 	if (mGUI->findWidget<MyGUI::List>("LoadList")->getIndexSelected() != MyGUI::ITEM_NONE) {
 		std::string lFilename = mGUI->findWidget<MyGUI::List>("LoadList")->getItemNameAt(
@@ -421,8 +405,8 @@ void GUI::loadListPressed(MyGUI::ListPtr _widget, unsigned int _index)
 
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
- 
-		boost::shared_ptr<TiXmlDocument> lSavegame(new TiXmlDocument((lSaveGameDirectory 
+
+		boost::shared_ptr<TiXmlDocument> lSavegame(new TiXmlDocument((lSaveGameDirectory
 			+ "saved_games/" + lFilename + ".xml").c_str()));
 
 		lSavegame->LoadFile(TIXML_ENCODING_UTF8);
@@ -440,7 +424,7 @@ std::string lUserHomeDirectory(getenv("HOME"));
 
 #ifdef WIN32
 		WIN32_FILE_ATTRIBUTE_DATA  lFileAttributes;
-		GetFileAttributesEx((cDataDirPre + "saved_games\\" + lFilename + ".xml").c_str(),
+		GetFileAttributesEx((Constant::cDataDirPre() + "saved_games\\" + lFilename + ".xml").c_str(),
 			GetFileExInfoStandard, &lFileAttributes);
 
 		SYSTEMTIME lTimeUTC, lTimeLocal;
@@ -473,7 +457,7 @@ std::string lUserHomeDirectory(getenv("HOME"));
 void GUI::menuSavePressed(MyGUI::WidgetPtr _widget)
 {
   if(mDemo) {
-		MyGUI::Message::createMessageBox("Message", StrLoc::get()->GameTitle(), StrLoc::get()->DemoNoSave());
+        MyGUI::Message::createMessageBox(StrLoc::get()->GameTitle(), StrLoc::get()->DemoNoSave());
     return;
   }
 
@@ -492,21 +476,21 @@ void GUI::menuSavePressed(MyGUI::WidgetPtr _widget)
 	mCurrentLayout = MyGUI::LayoutManager::getInstance().load("save_" + StrLoc::get()->LanguageCode() + ".layout");
 
 	mGUI->findWidget<MyGUI::Widget>("SaveWidget")->setPosition(
-		(mGUI->getViewWidth()/2) - 
+		(mGUI->getViewWidth()/2) -
 		(mGUI->findWidget<MyGUI::Widget>("SaveWidget")->getWidth()/2),
-		mGUI->getViewHeight()/2 - 
+		mGUI->getViewHeight()/2 -
 		mGUI->findWidget<MyGUI::Widget>("SaveWidget")->getHeight()/2);
 
 	MyGUI::StaticImagePtr lBackground = mGUI->findWidget<MyGUI::StaticImage>("Background");
 	lBackground->setImageTexture(cBackgrounds[getCurrentAspectRatio()]);
 	lBackground->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
 
-	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick = 
+	mGUI->findWidget<MyGUI::Button>("Back")->eventMouseButtonClick =
 		MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
 
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
- 
+
 	std::vector<std::string> lSavedGames = findFilesInDirectory(lSaveGameDirectory + "saved_games");
 
 	for (unsigned int i = 0; i < lSavedGames.size(); i++) {
@@ -514,10 +498,10 @@ std::string lUserHomeDirectory(getenv("HOME"));
 			mGUI->findWidget<MyGUI::List>("SaveList")->addItem(lSavedGames[i]);
 	}
 
-	mGUI->findWidget<MyGUI::Button>("SaveButton")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::saveButtonPressed);
-	mGUI->findWidget<MyGUI::List>("SaveList")->eventListChangePosition = 
-		MyGUI::newDelegate(this, &GUI::saveListPressed);
+    mGUI->findWidget<MyGUI::Button>("SaveButton")->eventMouseButtonClick +=
+        MyGUI::newDelegate(this, &GUI::saveButtonPressed);
+    mGUI->findWidget<MyGUI::List>("SaveList")->eventListChangePosition +=
+        MyGUI::newDelegate(this, &GUI::saveListPressed);
 
 	mGUI->findWidget<MyGUI::Button>("SaveButton")->setCaption(StrLoc::get()->SaveMenuSave());
 	mGUI->findWidget<MyGUI::Button>("Back")->setCaption(StrLoc::get()->MainMenuBack());
@@ -546,7 +530,7 @@ void GUI::saveButtonPressed(MyGUI::WidgetPtr _widget)
 
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
- 
+
 		std::vector<std::string> lSavedGames = findFilesInDirectory(lSaveGameDirectory + "saved_games");
 
 		for(unsigned int i = 0; i < lSavedGames.size(); i++)
@@ -559,24 +543,24 @@ std::string lUserHomeDirectory(getenv("HOME"));
 			mGUI->findWidget<MyGUI::List>("SaveList")->addItem(
 				mGUI->findWidget<MyGUI::Edit>("SaveName")->getCaption());
 
-			MyGUI::Message::createMessageBox("Message",
+            MyGUI::Message::createMessageBox(
 				StrLoc::get()->GameTitle(), StrLoc::get()->SaveMenuSaved());
 		} else {
-			MyGUI::MessagePtr lQuestionExit = MyGUI::Message::createMessageBox("Message",
+            MyGUI::Message* lQuestionExit = MyGUI::Message::createMessageBox(
 				StrLoc::get()->GameTitle(), StrLoc::get()->SaveMenuOverwrite(),
-				MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No 
+				MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No
 			    | MyGUI::MessageBoxStyle::IconQuest);
 			lQuestionExit->eventMessageBoxResult = MyGUI::newDelegate(this, &GUI::overwrite);
 		}
 	} else {
-		MyGUI::Message::createMessageBox("Message", StrLoc::get()->GameTitle(),
+        MyGUI::Message::createMessageBox(StrLoc::get()->GameTitle(),
 			StrLoc::get()->SaveMenuName());
 	}
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::overwrite(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style)
+void GUI::overwrite(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style)
 {
 	if (_style == MyGUI::MessageBoxStyle::Yes) {
 		EventHandler::raiseEvent(eSerializeGame, new EventArg< std::string >(
@@ -587,7 +571,7 @@ void GUI::overwrite(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style)
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::saveListPressed(MyGUI::ListPtr _widget, unsigned int _index)
+void GUI::saveListPressed(MyGUI::List* _sender, size_t _index)
 {
 	if (mGUI->findWidget< MyGUI::List >("SaveList")->getIndexSelected() != MyGUI::ITEM_NONE) {
 		mGUI->findWidget< MyGUI::Edit >("SaveName")->setCaption(
@@ -599,8 +583,8 @@ void GUI::saveListPressed(MyGUI::ListPtr _widget, unsigned int _index)
 
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
- 
-		boost::shared_ptr<TiXmlDocument> lSavegame(new TiXmlDocument((lSaveGameDirectory 
+
+		boost::shared_ptr<TiXmlDocument> lSavegame(new TiXmlDocument((lSaveGameDirectory
 			+ "saved_games/" + lFilename + ".xml").c_str()));
 
 		lSavegame->LoadFile(TIXML_ENCODING_UTF8);
@@ -617,7 +601,7 @@ std::string lUserHomeDirectory(getenv("HOME"));
                 std::string lDateTime = "N/A";
 #ifdef WIN32
 		WIN32_FILE_ATTRIBUTE_DATA  lFileAttributes;
-		GetFileAttributesEx((cDataDirPre + "SavedGames\\" + lFilename + ".xml").c_str(),
+		GetFileAttributesEx((Constant::cDataDirPre() + "SavedGames\\" + lFilename + ".xml").c_str(),
 			GetFileExInfoStandard, &lFileAttributes);
 
 		SYSTEMTIME lTimeUTC, lTimeLocal;
@@ -648,46 +632,39 @@ std::string lUserHomeDirectory(getenv("HOME"));
 
 void GUI::menuNewPressed(MyGUI::WidgetPtr _widget)
 {
-  // fade out hack
-  unsigned long lStartTime = mRoot->getTimer()->getMilliseconds();
-  unsigned long lPassedTime = 0;
+  mGUI->findWidget<MyGUI::Widget>("MainMenuWidget")->setAlpha(1.0);
 
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("MainMenuWidget")->setAlpha(1.0 - (float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
+    MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
 
-	MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
-
-	mCurrentLayout = MyGUI::LayoutManager::getInstance().load("newgame_" + StrLoc::get()->LanguageCode() + ".layout");
+    mCurrentLayout = MyGUI::LayoutManager::getInstance().loadLayout("newgame_" + StrLoc::get()->LanguageCode() + ".layout");
 
 	mGUI->findWidget< MyGUI::Widget >("NewGameWidget")->setPosition(
-		(mGUI->getViewWidth()/2) - 
+		(mGUI->getViewWidth()/2) -
 		(mGUI->findWidget< MyGUI::Widget >("NewGameWidget")->getWidth()/2),
-		mGUI->getViewHeight()/2 - 
+		mGUI->getViewHeight()/2 -
 		mGUI->findWidget< MyGUI::Widget >("NewGameWidget")->getHeight()/2);
 
 	MyGUI::StaticImagePtr lBackground = mGUI->findWidget< MyGUI::StaticImage >("Background");
 	lBackground->setImageTexture(cBackgrounds[getCurrentAspectRatio()]);
 	lBackground->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
 
-	mGUI->findWidget< MyGUI::Button >("Back")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
-	mGUI->findWidget< MyGUI::Button >("StartGameButton")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::newButtonPressed);
-	mGUI->findWidget< MyGUI::Button >("EasyRadio")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::newButtonPressed);
-	mGUI->findWidget< MyGUI::Button >("MediumRadio")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::newButtonPressed);
-	mGUI->findWidget< MyGUI::Button >("HardRadio")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::newButtonPressed);
-	mGUI->findWidget< MyGUI::Button >("Sandbox")->eventMouseButtonClick = 
-		MyGUI::newDelegate(this, &GUI::newButtonPressed);
-	mGUI->findWidget< MyGUI::List >("MapsList")->eventListChangePosition = 
-		MyGUI::newDelegate(this, &GUI::newListPressed);
-	mGUI->findWidget< MyGUI::List >("MissionsList")->eventListChangePosition = 
-		MyGUI::newDelegate(this, &GUI::newListPressed);
+    // TODO
+mGUI->findWidget< MyGUI::Button >("Back")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::menuBackToMainPressed);
+mGUI->findWidget< MyGUI::Button >("StartGameButton")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::newButtonPressed);
+mGUI->findWidget< MyGUI::Button >("EasyRadio")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::newButtonPressed);
+mGUI->findWidget< MyGUI::Button >("MediumRadio")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::newButtonPressed);
+mGUI->findWidget< MyGUI::Button >("HardRadio")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::newButtonPressed);
+mGUI->findWidget< MyGUI::Button >("Sandbox")->eventMouseButtonClick +=
+    MyGUI::newDelegate(this, &GUI::newButtonPressed);
+mGUI->findWidget< MyGUI::List >("MapsList")->eventListChangePosition +=
+    MyGUI::newDelegate(this, &GUI::newListPressed);
+mGUI->findWidget< MyGUI::List >("MissionsList")->eventListChangePosition +=
+        MyGUI::newDelegate(this, &GUI::newListPressed);
 
 	mGUI->findWidget< MyGUI::Button >("Back")->setCaption(StrLoc::get()->MainMenuBack());
 	mGUI->findWidget< MyGUI::Button >("StartGameButton")->setCaption(StrLoc::get()->NewMenuStart());
@@ -699,7 +676,7 @@ void GUI::menuNewPressed(MyGUI::WidgetPtr _widget)
 	mGUI->findWidget< MyGUI::StaticText >("MapsText")->setCaption(StrLoc::get()->NewMenuMap());
 	mGUI->findWidget< MyGUI::StaticText >("MissionGoalsText")->setCaption(StrLoc::get()->NewMenuMissionGoals());
 
-	std::vector< std::string > lMissions = findFilesInDirectory(cDataDirPre + "missions", false);
+	std::vector< std::string > lMissions = findFilesInDirectory(Constant::cDataDirPre() + "data/missions", false);
 	std::vector< std::string > lMapsNonUnique;
 	std::vector< std::string > lMaps;
 
@@ -714,20 +691,11 @@ void GUI::menuNewPressed(MyGUI::WidgetPtr _widget)
 
   std::unique_copy( lMapsNonUnique.begin(), lMapsNonUnique.end(), std::back_inserter( lMaps ) );
 
-	for (unsigned int j = 0; j < lMaps.size(); j++)
-		mGUI->findWidget<MyGUI::List>("MapsList")->addItem(mISOToFormattedMapname[lMaps[j]]);
+    for (unsigned int j = 0; j < lMaps.size(); j++) {
+        mGUI->findWidget<MyGUI::List>("MapsList")->addItem(mISOToFormattedMapname[lMaps[j]]);
+    }
 
-	mGUI->findWidget<MyGUI::Button>("MediumRadio")->setStateCheck(true);
-
-  // fade in hack
-  lStartTime = mRoot->getTimer()->getMilliseconds();
-  lPassedTime = 0;
-
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("NewGameWidget")->setAlpha((float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
+    mGUI->findWidget<MyGUI::Button>("MediumRadio")->setStateSelected(true);
 
   mGUI->findWidget<MyGUI::Widget>("NewGameWidget")->setAlpha(1.0);
 }
@@ -736,19 +704,19 @@ void GUI::menuNewPressed(MyGUI::WidgetPtr _widget)
 
 void GUI::newButtonPressed(MyGUI::WidgetPtr _widget)
 {
-	if(_widget->getName() == "StartGameButton")
+    if(_widget->getName() == "StartGameButton")
 	{
-		if ((mGUI->findWidget<MyGUI::List>("MapsList")->getIndexSelected() 
+		if ((mGUI->findWidget<MyGUI::List>("MapsList")->getIndexSelected()
 			!= MyGUI::ITEM_NONE)
-			&& (mGUI->findWidget<MyGUI::List>("MissionsList")->getIndexSelected() 
+			&& (mGUI->findWidget<MyGUI::List>("MissionsList")->getIndexSelected()
 			!= MyGUI::ITEM_NONE)) {
 			if (mGameRunning == true) {
 				if (mAskForRestart) {
-					MyGUI::MessagePtr lQuestionExit = MyGUI::Message::createMessageBox("Message",
+                    MyGUI::Message* lQuestionExit = MyGUI::Message::createMessageBox(
 						StrLoc::get()->GameTitle(), StrLoc::get()->NewMenuQuestion(),
 						MyGUI::MessageBoxStyle::Yes | MyGUI::MessageBoxStyle::No |
 						MyGUI::MessageBoxStyle::IconQuest);
-					lQuestionExit->eventMessageBoxResult = MyGUI::newDelegate(this,
+                    lQuestionExit->eventMessageBoxResult += MyGUI::newDelegate(this,
 						&GUI::unloadAndStartNew);
 				} else {
 					unloadAndStartNew(0, MyGUI::MessageBoxStyle::Yes);
@@ -758,10 +726,14 @@ void GUI::newButtonPressed(MyGUI::WidgetPtr _widget)
 					getItemDataAt<std::string>(
 					mGUI->findWidget<MyGUI::List>("MissionsList")->getIndexSelected())->c_str();
 
-				bool lSandbox =  mGUI->findWidget< MyGUI::Button >("Sandbox")->getStateCheck();
+                bool lSandbox =  mGUI->findWidget< MyGUI::Button >("Sandbox")->getStateSelected();
 
-				MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
-				mCurrentLayout = MyGUI::LayoutManager::getInstance().load("loading.layout");
+                // TODO
+                mPreviousLayout = mCurrentLayout;
+                //MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
+                mGUI->findWidget< MyGUI::Widget >("NewGameWidget")->setVisible(false);
+                mGUI->findWidget< MyGUI::Widget >("Background")->setVisible(false);
+                mCurrentLayout = MyGUI::LayoutManager::getInstance().loadLayout("loading.layout");
 
 				mGUI->findWidget< MyGUI::StaticImage >("Background")
           ->setSize(mGUI->getViewWidth(), mGUI->getViewHeight());
@@ -773,46 +745,46 @@ void GUI::newButtonPressed(MyGUI::WidgetPtr _widget)
 				lData.mSandbox = lSandbox;
 				lData.mNew = true;
 
-				MyGUI::PointerManager::getInstance().setVisible(false);
+                MyGUI::PointerManager::getInstance().setVisible(true);
 				mLoading = true;
 
 				EventHandler::raiseEvent(eGamestateChangeGUI);
 				EventHandler::raiseEvent(eLoadGame, new EventArg<StartData>(lData));
-			}
+            }
 		} else {
-			MyGUI::Message::createMessageBox("Message", StrLoc::get()->GameTitle(),
+            MyGUI::Message::createMessageBox(StrLoc::get()->GameTitle(),
 				StrLoc::get()->NewMenuSelect());
 		}
 	}
 	else if (_widget->getName() == "EasyRadio") {
-		mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateCheck(true);
-		mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateCheck(false);
+        mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateSelected(true);
+        mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateSelected(false);
 	}
 	else if (_widget->getName() == "MediumRadio") {
-		mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateCheck(true);
-		mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateCheck(false);
+        mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateSelected(true);
+        mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateSelected(false);
 	}
 	else if (_widget->getName() == "HardRadio") {
-		mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateCheck(true);
+        mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateSelected(true);
 	}
 	else if (_widget->getName() == "Sandbox") {
-		mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateCheck(true);
-		mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateCheck(false);
-		mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateCheck(false);
+        mGUI->findWidget< MyGUI::Button >("Sandbox")->setStateSelected(true);
+        mGUI->findWidget< MyGUI::Button >("EasyRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("MediumRadio")->setStateSelected(false);
+        mGUI->findWidget< MyGUI::Button >("HardRadio")->setStateSelected(false);
 	}
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::unloadAndLoad(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style)
+void GUI::unloadAndLoad(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style)
 {
 	if (_style == MyGUI::MessageBoxStyle::Yes) {
 		StartData lStartData;
@@ -827,7 +799,7 @@ void GUI::unloadAndLoad(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::unloadAndStartNew(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style)
+void GUI::unloadAndStartNew(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style)
 {
 	if (_style == MyGUI::MessageBoxStyle::Yes) {
 		std::string lMission = mGUI->findWidget< MyGUI::List >("MissionsList")
@@ -845,14 +817,14 @@ void GUI::unloadAndStartNew(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _s
 
 /*-----------------------------------------------------------------------------------------------*/
 
-void GUI::newListPressed(MyGUI::ListPtr _widget, unsigned int _index)
+void GUI::newListPressed(MyGUI::ListBox* _sender, size_t index)
 {
-	if (_widget->getName() == "MapsList") {
+    if (_sender->getName() == "MapsList") {
 		mGUI->findWidget< MyGUI::List >("MissionsList")->removeAllItems();
 
 		if (mGUI->findWidget< MyGUI::List >("MapsList")->getIndexSelected() != MyGUI::ITEM_NONE) {
-			std::vector< std::string > lMissions 
-        = findFilesInDirectory(cDataDirPre + "missions", false);
+			std::vector< std::string > lMissions
+        = findFilesInDirectory(Constant::cDataDirPre() + "data/missions", false);
 			std::vector< std::string > lMissionsMap;
 
 			for (unsigned int i = 0; i < lMissions.size(); i++) {
@@ -871,7 +843,7 @@ void GUI::newListPressed(MyGUI::ListPtr _widget, unsigned int _index)
 			}
 		}
 	}
-	else if(_widget->getName() == "MissionsList") {
+    else if(_sender->getName() == "MissionsList") {
 		if(mGUI->findWidget< MyGUI::List >("MissionsList")->getIndexSelected() != MyGUI::ITEM_NONE) {
 			std::vector< std::string > lMissionGoals;
 
@@ -882,7 +854,7 @@ void GUI::newListPressed(MyGUI::ListPtr _widget, unsigned int _index)
 
 			std::string lCaption;
 
-			if (lMissionGoals[0] == StrLoc::get()->GoalNone().asUTF8()) {
+			if (lMissionGoals[0] == StrLoc::get()->GoalNone()) {
 				lCaption = StrLoc::get()->GoalNone();
 			} else {
 				for (size_t j = 0; j < lMissionGoals.size(); j++)

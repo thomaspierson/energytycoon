@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "StaticGameObject.h"
-#include "InstancedGeometryManager.h"
+//#include "InstancedGeometryManager.h"
 #include "Terrain.h"
 
 /*-----------------------------------------------------------------------------------------------*/

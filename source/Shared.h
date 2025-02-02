@@ -1,20 +1,19 @@
 #ifndef SHARED_H
 #define SHARED_H
 
+#include <iostream>
+
 /*-----------------------------------------------------------------------------------------------*/
-
-// Data path for different builds
-#ifdef WIN32
-	#ifdef _DEBUG
-		const std::string cDataDirPre = "../../data/";
-	#else
-		const std::string cDataDirPre = "../data/"; 
-	#endif
-#else
-	const std::string cDataDirPre = "/usr/share/games/energytycoon/data/"; 
-#endif
-
-const int cDemoSeconds = 900;
+class Constant {
+public:
+	static std::string cDataDirPre() {
+		if (const char* env_p = std::getenv("ENERGYTYCOON_SHARE_PATH")) {
+			return std::string(env_p);
+		}
+		return std::string{ "/usr/share/games/energytycoon/"};
+	}
+	static constexpr int cDemoSeconds = 900;
+};
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -370,8 +369,8 @@ static std::vector<std::string> getStartDataFromMission(std::string pMissionFile
                                                         std::string pLanguage)
 {
 	std::vector<std::string> lReturn;
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((cDataDirPre 
-		+ "missions/" + pMissionFilename).c_str()));
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
+		+ "data/missions/" + pMissionFilename).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);
 
@@ -405,8 +404,8 @@ static std::vector<std::string> getMissionGoalsFromMission(std::string pMissionF
                                                            std::string pNone)
 {
 	std::vector<std::string> lReturn;
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((cDataDirPre 
-		+ "missions/" + pMissionFilename).c_str()));
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
+		+ "data/missions/" + pMissionFilename).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);
 

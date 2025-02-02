@@ -62,12 +62,12 @@ Game::Game(Ogre::RenderWindow* pRenderWindow, Ogre::SceneManager* pSceneManager,
   windowResized(mWindow);
   Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 
-  mGUI.reset(new GUI(mWindow, mRoot->getRenderSystem(), pRoot, pRestart));
+  mGUI.reset(new GUI(mWindow, mSceneManager, mRoot->getRenderSystem(), pRoot, pRestart));
   
   mGUI->setDemo(cDemo);
 
-  MyGUI::PointerManager::getInstance().setPosition(MyGUI::IntPoint(mWindow->getWidth() / 2,
-    mWindow->getHeight() / 2));
+  // MyGUI::PointerManager::getInstance().setPosition(MyGUI::IntPoint(mWindow->getWidth() / 2,
+  // mWindow->getHeight() / 2));
 
   REGISTER_CALLBACK(eGamestateChangeBuild, Game::enableBuildMode);
   REGISTER_CALLBACK(eGamestateChangeDemolish, Game::enableDemolishMode);
@@ -85,7 +85,7 @@ Game::Game(Ogre::RenderWindow* pRenderWindow, Ogre::SceneManager* pSceneManager,
 
   // Fresh start -> straight to main menu
   if (!pRestart) {
-    Audio::setMenu();
+    //Audio::setMenu();
     mGUI->switchToMainMenu();
     mGUI->setGameRunning(false);
   }
@@ -151,7 +151,7 @@ void Game::load(EventData* pData)
         lSavegame.reset(new TiXmlDocument((lSaveGameDirectory + "saved_games/"
           + lStartData.mSerializedFile + ".xml").c_str()));
       } else {
-        lSavegame.reset( new TiXmlDocument((cDataDirPre + "saved_games/"
+        lSavegame.reset( new TiXmlDocument((Constant::cDataDirPre() + "data/saved_games/"
           + getStartDataFromMission(lStartData.mMission,
           StrLoc::get()->MyGUILanguage())[2]).c_str()));
       }
@@ -270,7 +270,7 @@ void Game::serialize(EventData* pData)
   mGameTime->serializeIntoXMLElement(lSaveElement);
   mCompany->serializeIntoXMLElement(lSaveElement, mGUI);
 #ifdef WIN32
-  lSaveGame->SaveFile(cDataDirPre + "saved_games\\" + lFilename + ".xml");
+  lSaveGame->SaveFile(Constant::cDataDirPre() + "saved_games\\" + lFilename + ".xml");
 #else
 std::string lUserHomeDirectory(getenv("HOME"));
  std::string lSaveGameDirectory = lUserHomeDirectory + "/.energytycoon/";
@@ -347,9 +347,9 @@ bool Game::frameEnded(const Ogre::FrameEvent& pEvent)
 bool Game::mouseMoved(const OIS::MouseEvent &pEvent)
 {
   if (!pEvent.state.buttonDown(OIS::MB_Middle))
-    mGUI->getMyGUI()->injectMouseMove(pEvent);
+    MyGUI::InputManager::getInstance().injectMouseMove(pEvent.state.X.abs, pEvent.state.Y.abs, pEvent.state.Z.abs);
 
-  if(cDemo && (mDemoTime > cDemoSeconds))
+  if(cDemo && (mDemoTime > Constant::cDemoSeconds))
     return true;
 
   updateLastMouseData(pEvent);
@@ -430,7 +430,7 @@ bool Game::mouseMoved(const OIS::MouseEvent &pEvent)
             }
 
             if (lHighlight) {
-              MyGUI::PointerManager::getInstance().setPointer("netstart", 0);
+              MyGUI::PointerManager::getInstance().setPointer("netstart");
 
               if (mHighlighted)
                 mHighlighted->highlight(false);
@@ -540,7 +540,7 @@ bool Game::mouseMoved(const OIS::MouseEvent &pEvent)
       mMouseOver.reset();
 
       if (mGamestate != eDemolishMode) {
-        //MyGUI::PointerManager::getInstance().setDefaultPointer();
+        MyGUI::PointerManager::getInstance().setDefaultPointer("arrow");
       } else  {
         if (mHighlighted)
           mHighlighted->highlight(false);
@@ -603,12 +603,24 @@ bool Game::mouseMoved(const OIS::MouseEvent &pEvent)
 
 /*-----------------------------------------------------------------------------------------------*/
 
+MyGUI::MouseButton Game::ConvertOISMouseButton(OIS::MouseButtonID bID) {
+  if(bID == 0) {
+    return MyGUI::MouseButton::Left;
+  } else if(bID == 1) {
+    return MyGUI::MouseButton::Right;
+  }
+  else {
+    return MyGUI::MouseButton::None;
+  }
+}
+
 bool Game::mousePressed(const OIS::MouseEvent &pEvent, OIS::MouseButtonID pID)
 {
-  mGUI->getMyGUI()->injectMousePress(pEvent, pID);
+
+  MyGUI::InputManager::getInstance().injectMousePress(pEvent.state.X.abs, pEvent.state.Y.abs, Game::ConvertOISMouseButton(pID));
   updateLastMouseData(pEvent);
 
-  if(cDemo && (mDemoTime > cDemoSeconds))
+  if(cDemo && (mDemoTime > Constant::cDemoSeconds))
     return true;
 
   if (mBuildLock > 0)
@@ -742,7 +754,7 @@ bool Game::mousePressed(const OIS::MouseEvent &pEvent, OIS::MouseButtonID pID)
           mBuildLines.clear();
           destroyBuildEntity();
 
-          MyGUI::PointerManager::getInstance().setDefaultPointer();
+          MyGUI::PointerManager::getInstance().setDefaultPointer("arrow");
 
           mGamestate = eSelectMode;
         }
@@ -835,13 +847,13 @@ void Game::smoothOutPan(float pElapsedTime)
 
 bool Game::mouseReleased(const OIS::MouseEvent &pEvent, OIS::MouseButtonID pID)
 {
-  if(cDemo && (mDemoTime > cDemoSeconds))
+  if(cDemo && (mDemoTime > Constant::cDemoSeconds))
   {}
   else
   {
     if (mGamestate != eGUIExclusiveMode) {
       MyGUI::PointerManager::getInstance().setVisible(true);
-      MyGUI::PointerManager::getInstance().setDefaultPointer();
+      MyGUI::PointerManager::getInstance().setDefaultPointer("arrow");
 
       if ((pID == OIS::MB_Right) || (pID == OIS::MB_Middle))  {
         if (pID == OIS::MB_Middle) {
@@ -862,7 +874,7 @@ bool Game::mouseReleased(const OIS::MouseEvent &pEvent, OIS::MouseButtonID pID)
     }
   }
 
-  mGUI->getMyGUI()->injectMouseRelease(pEvent, pID);
+  MyGUI::InputManager::getInstance().injectMouseRelease(pEvent.state.X.abs, pEvent.state.Y.abs, Game::ConvertOISMouseButton(pID));
   updateLastMouseData(pEvent);
 
   return true;
@@ -872,7 +884,8 @@ bool Game::mouseReleased(const OIS::MouseEvent &pEvent, OIS::MouseButtonID pID)
 
 bool Game::keyPressed(const OIS::KeyEvent &pEvent)
 {
-  mGUI->getMyGUI()->injectKeyPress(pEvent);
+  // TODO
+  //mGUI->getMyGUI()->injectKeyPress(pEvent);
   return true;
 }
 
@@ -901,7 +914,8 @@ bool Game::keyReleased(const OIS::KeyEvent &pEvent)
     }
   }
 
-  mGUI->getMyGUI()->injectKeyRelease(pEvent);
+  // TODO
+  //mGUI->getMyGUI()->injectKeyRelease(pEvent);
   return true;
 }
 
@@ -931,11 +945,11 @@ bool Game::frameStarted(const Ogre::FrameEvent &pEvent)
       mGUI->updateDemoTime(mDemoTime);
     }
 
-    if(cDemo && (mDemoTime > cDemoSeconds)) {
+    if(cDemo && (mDemoTime > Constant::cDemoSeconds)) {
       if(!mDemoEventRaised) {
         mDemoEventRaised = true;
         MyGUI::PointerManager::getInstance().setVisible(true);
-        MyGUI::PointerManager::getInstance().setDefaultPointer();
+        MyGUI::PointerManager::getInstance().setDefaultPointer("netstart");
         mGUI->showDemoTimeUp(0);
       }
     }
@@ -991,14 +1005,15 @@ bool Game::frameStarted(const Ogre::FrameEvent &pEvent)
 void Game::handleMouseMovedMapView(const OIS::MouseEvent &pEvent)
 {
   MyGUI::PointerManager::getInstance().setVisible(true);
-  MyGUI::PointerManager::getInstance().setDefaultPointer();
+  MyGUI::PointerManager::getInstance().setDefaultPointer("arrow");
 
   if (mGamestate == eDemolishMode)
-    MyGUI::PointerManager::getInstance().setPointer("demolish", 0);
+    MyGUI::PointerManager::getInstance().setPointer("demolish");
 
   if (pEvent.state.buttonDown(OIS::MB_Middle)) {
     mGUI->setPanIcon(true, pEvent.state.X.abs, pEvent.state.Y.abs, true);
-    MyGUI::PointerManager::getInstance().setVisible(false);
+    // TODO
+    MyGUI::PointerManager::getInstance().setVisible(true);
     mPanCamera->rotateRight((float) pEvent.state.X.rel / cMouseRotationSteps / 2.0);
   }
 
@@ -1016,7 +1031,7 @@ void Game::handleMouseMovedMapView(const OIS::MouseEvent &pEvent)
 
 void Game::handleMapViewKeys(const Ogre::FrameEvent &pEvent)
 {
-  if(cDemo && (mDemoTime > cDemoSeconds))
+  if(cDemo && (mDemoTime > Constant::cDemoSeconds))
     return;
 
   if (!mWindow->isClosed()) {
@@ -1341,7 +1356,7 @@ void Game::startInputSystem(void)
 
 void Game::windowResized(Ogre::RenderWindow* pRenderWindow)
 {
-  size_t lWidth, lHeight, lDepth;
+  unsigned int lWidth, lHeight, lDepth;
   int lLeft, lTop;
 
   pRenderWindow->getMetrics(lWidth, lHeight, lDepth, lLeft, lTop);

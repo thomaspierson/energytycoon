@@ -5,6 +5,7 @@
 
 #include "Shared.h"
 #include "Company.h"
+#include <OgreWindowEventUtilities.h>
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -77,7 +78,7 @@ public:
 
 //! The game logic and Listeners implementation
 class Game: public Ogre::FrameListener,
-			      public Ogre::WindowEventListener,
+			      public OgreBites::WindowEventListener,
 			      public OIS::MouseListener,
 			      public OIS::KeyListener {
 public:
@@ -190,6 +191,8 @@ private:
 
   //! Create demolish particle system
   void setupDemolishParticles(void);
+
+	static MyGUI::MouseButton ConvertOISMouseButton(OIS::MouseButtonID bID);
 
 	
 	eGamestate mGamestate; //!< Current gamestate

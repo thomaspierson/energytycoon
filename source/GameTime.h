@@ -27,7 +27,7 @@ public:
 	void getTime(int &oYear, int &oMonth, int &oDay);
 
 	//! Get preformated and localized time/date string
-	Ogre::UTFString getTime(void);
+	Ogre::String getTime(void);
 
 	int getSpeedInt(void);
 

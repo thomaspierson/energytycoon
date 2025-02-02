@@ -5,6 +5,7 @@
 
 #include "Collidable.h"
 #include "PowerNet.h"
+#include "StdAfx.h"
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -27,7 +28,7 @@ public:
 	City(void);
 
 	//! Return name
-	Ogre::UTFString getName(void);
+	Ogre::String getName(void);
 
 	//! Add to scene
 	void addToSceneManager(Ogre::SceneManager* pSceneManager, boost::shared_ptr<Terrain> pTerrain);
@@ -112,7 +113,7 @@ private:
 	void weekPassed(EventData* pData);
 
 	Ogre::Vector2 mPosition; //!< Position (center)
-	Ogre::UTFString mName; //!< City name
+	Ogre::String mName; //!< City name
 	std::string mSize; //!< City size
 	Ogre::Entity* mEntity; //!< OGRE entities
 	Ogre::Entity* mEntityFloor;

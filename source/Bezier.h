@@ -1,6 +1,8 @@
 #ifndef BEZIER_H
 #define BEZIER_H
 
+#include "StdAfx.h"
+
 /*-----------------------------------------------------------------------------------------------*/
 
 const double cDefaultBezierError = 4.0; //!< Maximum deviation from given points

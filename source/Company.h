@@ -3,6 +3,7 @@
 
 /*-----------------------------------------------------------------------------------------------*/
 
+#include "StdAfx.h"
 #include "Shared.h"
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -184,7 +185,7 @@ public:
 //! A trading partner (defined in the mission XML file)
 class TradingPartner {
 public:
-	Ogre::UTFString mName;
+	Ogre::String mName;
 	int mPrice;
 	bool mAvailable;
 };

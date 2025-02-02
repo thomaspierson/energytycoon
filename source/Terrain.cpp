@@ -8,11 +8,11 @@ Terrain::Terrain(std::string pMapPrefix, Ogre::SceneManager* pSceneManager)
 {
 	evaluateParams();
 
-	std::string lPrefix = cDataDirPre + "maps/" + pMapPrefix + "_";
+    std::string lPrefix = pMapPrefix + "_";
 
 	Ogre::Image lHeightmapImage;
-	lHeightmapImage.load(lPrefix + "heightmap.png",
-		Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME); 
+    lHeightmapImage.load(lPrefix + "heightmap.png",
+        Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	Ogre::MaterialPtr lMaterial = Ogre::MaterialManager::getSingleton().getByName(pMapPrefix + "_material");
 
@@ -160,7 +160,7 @@ void Terrain::evaluateParams(void)
 	boost::shared_ptr<TiXmlDocument> lTerrainConfig;
 	TiXmlNode* rootNode;
 
-	lTerrainConfig.reset(new TiXmlDocument((cDataDirPre + "maps/"  + mMapPrefix + 
+	lTerrainConfig.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/"  + mMapPrefix +
     "_terrain.xml").c_str()));
 
 	lTerrainConfig->LoadFile(TIXML_ENCODING_UTF8);

@@ -23,14 +23,10 @@
 #include "OGRE/OgreConfigFile.h"
 #include "OGRE/OgreStringConverter.h"
 #include "OGRE/OgreException.h"
-#include "MyGUI/MyGUI.h"
-#include "irrKlang.h"
-#ifdef WIN32
-  #define OIS_DYNAMIC_LIB
-  #include <OIS/OIS.h>
-#else
-  #include "OIS/OIS.h"
-#endif
+#include <MYGUI/MyGUI.h>
+#define OIS_DYNAMIC_LIB
+#include <OIS/OIS.h>
+
 #include "Shared.h"
 #include "StringsLoc.h"
 #include "GameConfig.h"

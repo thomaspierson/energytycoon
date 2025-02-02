@@ -3,9 +3,9 @@
 
 /*-----------------------------------------------------------------------------------------------*/
 
-#include <ETFlatTerrain.h>
-#include <ETPage.h>
-#include <ETUtility.h>
+#include "../3rdparty/etl/source/ETFlatTerrain.h"
+#include "../3rdparty/etl/source/ETPage.h"
+#include "../3rdparty/etl/source/ETUtility.h"
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -23,7 +23,7 @@ public:
   Terrain(std::string pMapPrefix, Ogre::SceneManager* pSceneManager);
 
   //! Flatten a quad before building a structure
-  void flattenQuad(Ogre::Vector2 pCenter, unsigned int pSideLength, float pHeight);
+  void flattenQuad(Ogre::Vector2 pCenter, size_t pSideLength, float pHeight);
 
   //! Get terrain weidth
   int getWidth(void) { return mWidth; }

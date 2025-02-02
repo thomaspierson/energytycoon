@@ -45,7 +45,7 @@ Company::Company(std::string pMission, bool pSandbox,
   mBribeActive(false),
 	mNoTrainingActive(false),
   mBankruptcyWarningIssued(false),
-  mGasLastWeek(0), 
+  mGasLastWeek(0),
 	mCoalLastWeek(0),
   mUraniumLastWeek(0),
   mGasTrend(0),
@@ -62,9 +62,9 @@ Company::Company(std::string pMission, bool pSandbox,
 	REGISTER_CALLBACK(eMonthPassed, Company::monthPassed);
 	REGISTER_CALLBACK(eYearPassed, Company::yearPassed);
 	REGISTER_CALLBACK(eUpdateFinanceChart, Company::updateFinanceChart);
-	
+
 	setupMissionParams(pMission);
-	
+
 	if(mSandbox)
 	{
 		mCoal = 50000;
@@ -218,7 +218,7 @@ bool Company::buyObject(eCompanyObjectType pType, bool pFree)
 				lMessage.mUrgent = false;
 				lMessage.mID = 0;
 
-				EventHandler::raiseEvent(eTickerMessage, 
+				EventHandler::raiseEvent(eTickerMessage,
 					new EventArg<TickerMessage>(lMessage));
 				EventHandler::raiseEvent(eUpdateCOBuildingButtons);
 			}
@@ -232,7 +232,7 @@ bool Company::buyObject(eCompanyObjectType pType, bool pFree)
 				lMessage.mUrgent = false;
 				lMessage.mID = 0;
 
-				EventHandler::raiseEvent(eTickerMessage, 
+				EventHandler::raiseEvent(eTickerMessage,
 					new EventArg<TickerMessage>(lMessage));
 				EventHandler::raiseEvent(eUpdateCOBuildingButtons);
 			}
@@ -246,7 +246,7 @@ bool Company::buyObject(eCompanyObjectType pType, bool pFree)
 				lMessage.mUrgent = false;
 				lMessage.mID = 0;
 
-				EventHandler::raiseEvent(eTickerMessage, 
+				EventHandler::raiseEvent(eTickerMessage,
 					new EventArg<TickerMessage>(lMessage));
 				EventHandler::raiseEvent(eUpdateCOBuildingButtons);
 			}
@@ -271,8 +271,8 @@ bool Company::buyObject(eCompanyObjectType pType, bool pFree)
 
 void Company::setupMissionParams(std::string pMission)
 {
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((cDataDirPre 
-		+ "missions/" + pMission).c_str()));
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
+		+ "/data/missions/" + pMission).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);
 
@@ -287,11 +287,11 @@ void Company::setupMissionParams(std::string pMission)
 		lPartner.mPrice = toNumber<int>(node->ToElement()->Attribute("price"));
 
 		TiXmlNode* nameNode = node->FirstChildElement("name");
-		
+
 		while (nameNode) {
-			if (((std::string)nameNode->ToElement()->Attribute("language")) 
-				== StrLoc::get()->MyGUILanguage().asUTF8()) {
-				lPartner.mName = Ogre::UTFString(nameNode->ToElement()->GetText());
+			if (((std::string)nameNode->ToElement()->Attribute("language"))
+				== StrLoc::get()->MyGUILanguage()) {
+				lPartner.mName = Ogre::String(nameNode->ToElement()->GetText());
 				break;
 			}
 
@@ -304,10 +304,10 @@ void Company::setupMissionParams(std::string pMission)
 			lPartner.mAvailable = false;
 
 		mTradingPartners.push_back(lPartner);
-			
+
 		node = node->NextSiblingElement("trading_partner");
 	}
-	
+
 	node = rootNode->FirstChildElement("mission_goal");
 
 	while (node) {
@@ -316,8 +316,8 @@ void Company::setupMissionParams(std::string pMission)
 		TiXmlNode* textNode = node->FirstChildElement("text");
 
 		while (textNode) {
-			if (((std::string)textNode->ToElement()->Attribute("language")) 
-				== StrLoc::get()->MyGUILanguage().asUTF8()) {
+			if (((std::string)textNode->ToElement()->Attribute("language"))
+				== StrLoc::get()->MyGUILanguage()) {
 				lTemp.mText = textNode->ToElement()->GetText();
 			}
 
@@ -402,7 +402,7 @@ void Company::serializeIntoXMLElement(TiXmlElement* pParentElement, boost::share
 
 	for (size_t k = 0; k < mTradingPartners.size(); ++k) {
 		TiXmlElement* lTradingPartner = new TiXmlElement("trading_partner");
-		lTradingPartner->SetAttribute("name", mTradingPartners[k].mName.asUTF8_c_str());
+		lTradingPartner->SetAttribute("name", mTradingPartners[k].mName.c_str());
 		lTradingPartner->SetAttribute("available", mTradingPartners[k].mAvailable ? "true" : "false");
 		pParentElement->LinkEndChild(lTradingPartner);
 	}
@@ -835,21 +835,21 @@ std::vector<std::string> Company::getCityOpinions(int pCityIndex)
 	if (mGlobalImage > 50.0 && randBool())
 		lOpinions.push_back(mName + StrLoc::get()->OpinionIsOK());
 	else if (randBool())
-		lOpinions.push_back(StrLoc::get()->OpinionDontLike1() + mName 
+		lOpinions.push_back(StrLoc::get()->OpinionDontLike1() + mName
     + StrLoc::get()->OpinionDontLike2());
 
 	if (mGlobalImage > 85.0 && randBool())
 			lOpinions.push_back(mName + StrLoc::get()->OpinionIsGreat());
 
 	if (mGlobalAdvertising > 20 && randBool())
-			lOpinions.push_back(StrLoc::get()->OpinionSawAd1() + mName 
+			lOpinions.push_back(StrLoc::get()->OpinionSawAd1() + mName
       + StrLoc::get()->OpinionSawAd2());
 
 	if (mGlobalPrice > 20 && randBool())
-		lOpinions.push_back(StrLoc::get()->OpinionPriceHigh1() + mName 
+		lOpinions.push_back(StrLoc::get()->OpinionPriceHigh1() + mName
     + StrLoc::get()->OpinionPriceHigh2());
 	else if (randBool())
-		lOpinions.push_back(StrLoc::get()->OpinionPriceOK1() + mName 
+		lOpinions.push_back(StrLoc::get()->OpinionPriceOK1() + mName
     + StrLoc::get()->OpinionPriceOK2());
 
 	return lOpinions;
@@ -1278,7 +1278,7 @@ void Company::handleCustomers(void)
 	}
 
 	float lPriceRigging = 1.0;
-	
+
 	if (mPriceActive)
 		lPriceRigging = GameConfig::getDouble("PriceRiggingIncomeBoost");
 
@@ -1298,17 +1298,17 @@ void Company::handleCustomers(void)
 	else if (mContractTime == e24)
 		lIncomeMultiplicator *= GameConfig::getDouble("24TimeIncomeFactor");
 
-	mMoney += mGlobalPrice * (((float)mCompleteCustomers 
-    * GameConfig::getDouble("AverageCustomerDemand")) 
+	mMoney += mGlobalPrice * (((float)mCompleteCustomers
+    * GameConfig::getDouble("AverageCustomerDemand"))
 		/ 1000) * lIncomeMultiplicator * lPriceRigging;
-	mCurrentMonth.mCustomerIncome += mGlobalPrice * (((float)mCompleteCustomers 
-    * GameConfig::getDouble("AverageCustomerDemand")) 
+	mCurrentMonth.mCustomerIncome += mGlobalPrice * (((float)mCompleteCustomers
+    * GameConfig::getDouble("AverageCustomerDemand"))
 		/ 1000) * lIncomeMultiplicator * lPriceRigging;
-	mCurrentYear.mCustomerIncome += mGlobalPrice * (((float)mCompleteCustomers 
-    * GameConfig::getDouble("AverageCustomerDemand")) 
+	mCurrentYear.mCustomerIncome += mGlobalPrice * (((float)mCompleteCustomers
+    * GameConfig::getDouble("AverageCustomerDemand"))
 		/ 1000) * lIncomeMultiplicator * lPriceRigging;
-	mIncome += mGlobalPrice * (((float)mCompleteCustomers 
-    * GameConfig::getDouble("AverageCustomerDemand")) 
+	mIncome += mGlobalPrice * (((float)mCompleteCustomers
+    * GameConfig::getDouble("AverageCustomerDemand"))
 		/ 1000) * lIncomeMultiplicator * lPriceRigging;
 }
 
@@ -1490,33 +1490,33 @@ std::string TradingOffer::formatted(void)
 
 	if (mPermanent) {
 		if (!mWorldMarket)
-			lFormatted += ", " +  StrLoc::get()->EveryWeek() + " (" 
-			+ StrLoc::get()->PriceT() + ": " + toString(mFixedPrice) + L"k€"
+			lFormatted += ", " +  StrLoc::get()->EveryWeek() + " ("
+			+ StrLoc::get()->PriceT() + ": " + toString(mFixedPrice) + "k€"
 			+ StrLoc::get()->TooltipPerWeek() + ")";
 		else
-			lFormatted += ", " +  StrLoc::get()->EveryWeek() + " (" 
-			+ StrLoc::get()->PriceT() + ": " + StrLoc::get()->WorldMarket() 
+			lFormatted += ", " +  StrLoc::get()->EveryWeek() + " ("
+			+ StrLoc::get()->PriceT() + ": " + StrLoc::get()->WorldMarket()
 			+ " - " + toString(mDiscount + 1) + "%)";
 	} else {
 		if (!mUnique) {
 			if(!mWorldMarket) {
-				lFormatted += StrLoc::get()->For() + toString(mWeeks) + " " 
-					+ StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT() 
-					+ ": " + toString(mFixedPrice) + L"k€"
+				lFormatted += StrLoc::get()->For() + toString(mWeeks) + " "
+					+ StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT()
+					+ ": " + toString(mFixedPrice) + "k€"
 					+ StrLoc::get()->TooltipPerWeek() + ")";
 			} else {
 				if (mDiscount > 20)
-					lFormatted +=  StrLoc::get()->For() + toString(mWeeks) 
-					+ " " + StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT() 
+					lFormatted +=  StrLoc::get()->For() + toString(mWeeks)
+					+ " " + StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT()
 					+ ": " + StrLoc::get()->WorldMarket() + " - " + toString(mDiscount) + "%)";
 				else
-					lFormatted +=  StrLoc::get()->For() + toString(mWeeks) 
-					+ " " + StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT() 
+					lFormatted +=  StrLoc::get()->For() + toString(mWeeks)
+					+ " " + StrLoc::get()->Weeks() + " (" + StrLoc::get()->PriceT()
 					+ ": " + StrLoc::get()->WorldMarket() + ")";
 			}
 		} else {
-			lFormatted += " (" + StrLoc::get()->PriceT() + ": " 
-				+ toString(mFixedPrice) + L"k€)";
+			lFormatted += " (" + StrLoc::get()->PriceT() + ": "
+				+ toString(mFixedPrice) + "k€)";
 		}
 	}
 
@@ -1546,22 +1546,22 @@ std::string TradingOffer::formattedCurrent(void)
 
 	if (mPermanent) {
 		if (!mWorldMarket)
-			lFormatted += " (" + StrLoc::get()->EveryWeekS() + ", " 
-			+ StrLoc::get()->PriceT() + ": " + toString(mFixedPrice) + L"k€"
+			lFormatted += " (" + StrLoc::get()->EveryWeekS() + ", "
+			+ StrLoc::get()->PriceT() + ": " + toString(mFixedPrice) + "k€"
 			+ StrLoc::get()->TooltipPerWeek() + ")";
 		else
-			lFormatted += " (" + StrLoc::get()->EveryWeekS() + ", " 
-			+ StrLoc::get()->PriceT() + ": " + StrLoc::get()->WorldMarket() 
+			lFormatted += " (" + StrLoc::get()->EveryWeekS() + ", "
+			+ StrLoc::get()->PriceT() + ": " + StrLoc::get()->WorldMarket()
 			+ " - " + toString(mDiscount + 1) + "%)";
 	}
 	else {
 		if (!mWorldMarket)
-			lFormatted += " (" + toString(mWeeks) + " " 
-			+ StrLoc::get()->WeeksRemaining() + ", " + StrLoc::get()->PriceT() 
-			+ ": " + toString(mFixedPrice) + L"k€" + StrLoc::get()->TooltipPerWeek() + ")";
+			lFormatted += " (" + toString(mWeeks) + " "
+			+ StrLoc::get()->WeeksRemaining() + ", " + StrLoc::get()->PriceT()
+			+ ": " + toString(mFixedPrice) + "k€" + StrLoc::get()->TooltipPerWeek() + ")";
 		else
-			lFormatted += " (" + toString(mWeeks) + " " 
-			+ StrLoc::get()->WeeksRemaining() + ", " + StrLoc::get()->PriceT() 
+			lFormatted += " (" + toString(mWeeks) + " "
+			+ StrLoc::get()->WeeksRemaining() + ", " + StrLoc::get()->PriceT()
 			+ ": " + StrLoc::get()->WorldMarket() + " - " + toString(mDiscount + 1) + "%)";
 	}
 
@@ -1640,7 +1640,7 @@ bool Company::acceptTradingOffer(std::string pName)
 			mTradingOffers[lIndex].mFixedPrice *= -1;
 		} else {
 			if (mTaxFreeTrades > 0) {
-				mTradingOffers[lIndex].mFixedPrice 
+				mTradingOffers[lIndex].mFixedPrice
 					= mTradingOffers[lIndex].mFixedPrice * 0.5;
 
 				mTaxFreeTrades--;
@@ -1658,7 +1658,7 @@ bool Company::acceptTradingOffer(std::string pName)
 				lMessage.mDetail = StrLoc::get()->FreeTradesDetail();
 				lMessage.mUrgent = false;
 
-				EventHandler::raiseEvent(eTickerMessage, 
+				EventHandler::raiseEvent(eTickerMessage,
 					new EventArg<TickerMessage>(lMessage));
 			}
 
@@ -1902,7 +1902,7 @@ std::string Company::getCurrentResearch(int &oPercentageCompleted)
 {
 	for (int i = 0; i < 21; i++) {
 		if (mResearchSet.mStarted[i] == true) {
-			oPercentageCompleted = ((float)(mResearchSet.mWeeks[i] 
+			oPercentageCompleted = ((float)(mResearchSet.mWeeks[i]
 			- mResearchSet.mWeeksLeft[i])/(float)mResearchSet.mWeeks[i])*99;
 			return mResearchSet.mName[i];
 		}
@@ -1966,7 +1966,7 @@ bool Company::startResearch(int pIndex)
 		mResearchSet.mWeeksLeft[pIndex] = mResearchSet.mWeeks[pIndex];
 
 		TickerMessage lMessage;
-		lMessage.mMessage = StrLoc::get()->ResearchStartedA() 
+		lMessage.mMessage = StrLoc::get()->ResearchStartedA()
 			+ mResearchSet.mName[pIndex] + StrLoc::get()->ResearchStartedB();
 		lMessage.mPointOfInterest = Ogre::Vector2(-1,-1);
 		lMessage.mUrgent = false;
@@ -1992,18 +1992,18 @@ void Company::updateResearch(void)
 				mResearchSet.mStarted[i] = false;
 
 				TickerMessage lMessage;
-				lMessage.mMessage = StrLoc::get()->ResearchFinishedA() 
+				lMessage.mMessage = StrLoc::get()->ResearchFinishedA()
 					+ mResearchSet.mName[i] + StrLoc::get()->ResearchFinishedB();
 				lMessage.mPointOfInterest = Ogre::Vector2(-1, -1);
 				lMessage.mUrgent = false;
 
 				if(i == 20)
-					EventHandler::raiseEvent(eShowNewspaper, 
-						new EventArg<std::string>("np_fusion.png", 
-						StrLoc::get()->NPFusion(), mName + " " 
+					EventHandler::raiseEvent(eShowNewspaper,
+						new EventArg<std::string>("np_fusion.png",
+						StrLoc::get()->NPFusion(), mName + " "
 						+ StrLoc::get()->NPFusionDetail()));
 
-				EventHandler::raiseEvent(eTickerMessage, 
+				EventHandler::raiseEvent(eTickerMessage,
 					new EventArg<TickerMessage>(lMessage));
 				EventHandler::raiseEvent(eUpdateResearchableButtons);
 				EventHandler::raiseEvent(eUpdateCOBuildingButtons);
@@ -2094,9 +2094,9 @@ void Company::handleSpecialActions(void)
 					(*it).mMonthLeft = 48;
 
 					if (randPercent(GameConfig::getDouble("ExposeProbBribe"))) {
-						EventHandler::raiseEvent(eShowNewspaper, 
-							new EventArg<std::string>("np_bribe.png", 
-							StrLoc::get()->NPBribe(), mName + " " 
+						EventHandler::raiseEvent(eShowNewspaper,
+							new EventArg<std::string>("np_bribe.png",
+							StrLoc::get()->NPBribe(), mName + " "
 							+ StrLoc::get()->NPBribeDetail()));
 
 						if (mGlobalImage >= GameConfig::getInt("ImageHitBribe"))
@@ -2121,9 +2121,9 @@ void Company::handleSpecialActions(void)
 				mPriceActive = true;
 
 				if (randPercent(GameConfig::getDouble("ExposeProbPriceRigging"))) {
-					EventHandler::raiseEvent(eShowNewspaper, 
-						new EventArg<std::string>("np_price.png", 
-						StrLoc::get()->NPPriceRigging(), mName + " " 
+					EventHandler::raiseEvent(eShowNewspaper,
+						new EventArg<std::string>("np_price.png",
+						StrLoc::get()->NPPriceRigging(), mName + " "
 						+ StrLoc::get()->NPPriceRiggingDetail()));
 
 					if (mGlobalImage >= GameConfig::getInt("ImageHitPriceRigging"))
@@ -2146,9 +2146,9 @@ void Company::handleSpecialActions(void)
 				mWarActive = true;
 
 				if (randPercent(GameConfig::getDouble("ExposeProbWarSupport"))) {
-					EventHandler::raiseEvent(eShowNewspaper, 
-						new EventArg<std::string>("np_war.png", 
-						StrLoc::get()->NPWar(), mName + " " 
+					EventHandler::raiseEvent(eShowNewspaper,
+						new EventArg<std::string>("np_war.png",
+						StrLoc::get()->NPWar(), mName + " "
 						+ StrLoc::get()->NPWarDetail()));
 
 					if (mGlobalImage >= GameConfig::getInt("ImageHitWarSupport"))
@@ -2171,9 +2171,9 @@ void Company::handleSpecialActions(void)
 				mWasteActive = true;
 
 				if (randPercent(GameConfig::getDouble("ExposeProbWasteDumping"))) {
-					EventHandler::raiseEvent(eShowNewspaper, 
-						new EventArg<std::string>("np_waste.png", 
-						StrLoc::get()->NPWasteDumping(), mName 
+					EventHandler::raiseEvent(eShowNewspaper,
+						new EventArg<std::string>("np_waste.png",
+						StrLoc::get()->NPWasteDumping(), mName
 						+ " " + StrLoc::get()->NPWasteDumpingDetail()));
 
 					if (mGlobalImage >= GameConfig::getInt("ImageHitWasteDumping"))
@@ -2196,9 +2196,9 @@ void Company::handleSpecialActions(void)
 				mNoTrainingActive = true;
 
 				if (randPercent(GameConfig::getDouble("ExposeProbNoTraining"))) {
-					EventHandler::raiseEvent(eShowNewspaper, 
-						new EventArg<std::string>("np_training.png", 
-						StrLoc::get()->NPNoTraining(), mName + " " 
+					EventHandler::raiseEvent(eShowNewspaper,
+						new EventArg<std::string>("np_training.png",
+						StrLoc::get()->NPNoTraining(), mName + " "
 						+ StrLoc::get()->NPNoTrainingDetail()));
 
 					if (mGlobalImage >= GameConfig::getInt("ImageHitNoTraining"))
@@ -2300,7 +2300,7 @@ void Company::handleAccidents(void)
 				lPowerplants[i]->setDamaged();
 
 				TickerMessage lMessage;
-				lMessage.mMessage = StrLoc::get()->DamagedPPMessageA() + lPowerplants[i]->getName() 
+				lMessage.mMessage = StrLoc::get()->DamagedPPMessageA() + lPowerplants[i]->getName()
 					+ StrLoc::get()->DamagedPPMessageB();
 				lMessage.mPointOfInterest = lPowerplants[i]->getPosition();
 				lMessage.mUrgent = false;
@@ -2329,13 +2329,13 @@ void Company::handleAccidents(void)
 		if (lAccident) {
 			int lPowerplantAffected = rand() % lPowerplants.size();
 
-			EventHandler::raiseEvent(eShowNewspaper, 
-				new EventArg<std::string>("np_accident.png", 
-				StrLoc::get()->Accident(), StrLoc::get()->AccidentDetail1() + 
+			EventHandler::raiseEvent(eShowNewspaper,
+				new EventArg<std::string>("np_accident.png",
+				StrLoc::get()->Accident(), StrLoc::get()->AccidentDetail1() +
 				lPowerplants[lPowerplantAffected]->getName() + StrLoc::get()->AccidentDetail2()));
 
 			TickerMessage lMessage;
-			lMessage.mMessage = StrLoc::get()->PPShutdown1() 
+			lMessage.mMessage = StrLoc::get()->PPShutdown1()
         + lPowerplants[lPowerplantAffected]->getName() +
 				StrLoc::get()->PPShutdown2();
 			lMessage.mPointOfInterest = lPowerplants[lPowerplantAffected]->getPosition();
@@ -2354,8 +2354,8 @@ void Company::handleAccidents(void)
 				mResourceBuildings[j]->setDamaged();
 
 				TickerMessage lMessage;
-				lMessage.mMessage = StrLoc::get()->DamagedResourceMessageA() 
-          + mResourceBuildings[j]->getName() 
+				lMessage.mMessage = StrLoc::get()->DamagedResourceMessageA()
+          + mResourceBuildings[j]->getName()
 					+ StrLoc::get()->DamagedResourceMessageB();
 				lMessage.mPointOfInterest = mResourceBuildings[j]->getPosition();
 				lMessage.mUrgent = false;
@@ -2397,9 +2397,9 @@ bool Company::isCreditworthy(int pAmount, std::string& pWhyNot)
 	int lNetWorthNeededK = ((lCompleteCreditVolume + pAmount - lBaseVolume)/lNetWorthFactor)/1000;
 
 	if (lCompleteK > lCreditMaxK) {
-		pWhyNot = StrLoc::get()->NotEnoughNetWorth() + StrLoc::get()->NetWorthNeeded() 
-			+ toString(lNetWorthNeededK) + L"k€" + StrLoc::get()->NetWorthHave()
-			+ toString(mNetWorth/1000) + L"k€";
+		pWhyNot = StrLoc::get()->NotEnoughNetWorth() + StrLoc::get()->NetWorthNeeded()
+			+ toString(lNetWorthNeededK) + "k€" + StrLoc::get()->NetWorthHave()
+			+ toString(mNetWorth/1000) + "k€";
 		return false;
 	}
 

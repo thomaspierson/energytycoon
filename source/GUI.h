@@ -7,6 +7,10 @@
 #include "Audio.h"
 #include "GameTime.h"
 #include "Weather.h"
+#include "MessageBox.h"
+#include "MessageBoxStyle.h"
+#include <MYGUI/MyGUI_OgreRenderManager.h>
+#include <MYGUI/MyGUI_OgrePlatform.h>
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -117,7 +121,7 @@ class GUI
 public:
 
 	//! Startup MyGUI
-	GUI(Ogre::RenderWindow* pWindow, Ogre::RenderSystem* pRenderSystem, Ogre::Root* pRoot,
+    GUI(Ogre::RenderWindow* pWindow, Ogre::SceneManager* pScene, Ogre::RenderSystem* pRenderSystem, Ogre::Root* pRoot,
     bool pRestart = false);
 
 	//! Shutdown
@@ -130,7 +134,7 @@ public:
 	bool isMouseOverGUI(void);
 
 	//! Update DateTimePanel
-	void updateGameTime(Ogre::UTFString pTime, eSpeed pSpeed);
+	void updateGameTime(Ogre::String pTime, eSpeed pSpeed);
 
 	//! Update realtime company data
 	void updateCompanyData(EventData* pData);
@@ -203,7 +207,7 @@ public:
   //! set mission data
 	void setMission(std::string pMission) { mMission = pMission; }
 
-  //! show popup text (e.g. "-50k€" when building)
+  //! show popup text (e.g. "-50kï¿½" when building)
 	void popMessage(std::string pMessage, double pDuration, int pX, int pY);
 
   //! update popup messages (fadeout)
@@ -215,8 +219,8 @@ public:
 	void showDemoTimeUp(EventData* pData);
 private:
 
-  void demoQuitPressed(MyGUI::WidgetPtr _widget);
-  void demoWebsitePressed(MyGUI::WidgetPtr _widget);
+  void demoQuitPressed(MyGUI::Widget* _widget);
+  void demoWebsitePressed(MyGUI::Widget* _widget);
 
 	// ET event handlers
 	void newWeather(EventData* pData);
@@ -248,14 +252,14 @@ private:
 	void recalcCreditData(void);
 	void recalcRate(void);
 	void setupGamePanels(void);
-	void computeNextButtonPlacement(MyGUI::StaticImagePtr pPanel, int &oNextX, int &oNextY);
-	void createButton(MyGUI::StaticImagePtr pPanel,std::string pCaption, std::string pName,
+    void computeNextButtonPlacement(MyGUI::ImageBox* pPanel, int &oNextX, int &oNextY);
+    void createButton(MyGUI::ImageBox* pPanel,std::string pCaption, std::string pName,
     int pX, int pY);
-	void fitInfoPanel(MyGUI::StaticImagePtr pInfoPanel, MyGUI::WidgetPtr pButtonPanel,
-    MyGUI::WidgetPtr pMinimapPanel);
+    void fitInfoPanel(MyGUI::ImageBox* pInfoPanel, MyGUI::Widget* pButtonPanel,
+    MyGUI::Widget* pMinimapPanel);
 	void changeShadowTextCaption(std::string pTextName, std::string pCaption);
 	void changeShadowTextCaptionW(std::string pTextName, std::wstring pCaption);
-	void showTooltip(bool pShow, std::wstring pText);
+    void showTooltip(bool pShow, std::string pText);
 	void showCityInfo(boost::shared_ptr<City> pCity);
 	void showPowerPlantInfo(boost::shared_ptr<Powerplant> pPowerplant);
 	void showResourceInfo(boost::shared_ptr<ResourceBuilding> pResourceBuilding);
@@ -268,96 +272,98 @@ private:
 	void setHoverTextVisible(bool pVisible);
 
 	// MyGUI event handlers
-	void question(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void minimapPressed(MyGUI::WidgetPtr _widget, int _left, int _top, MyGUI::MouseButton _button);
-	void minimapDragged(MyGUI::WidgetPtr _widget, int _left, int _top);
-	void minimapButtonPressed(MyGUI::WidgetPtr _widget);
-	void tickerLinePressed(MyGUI::WidgetPtr _widget);
-	void gameSpeedFasterPressed(MyGUI::WidgetPtr _widget);
-	void gameSpeedSlowerPressed(MyGUI::WidgetPtr _widget);
-	void gameSpeedPausePressed(MyGUI::WidgetPtr _widget);
-	void buildPowerPlantPressed(MyGUI::WidgetPtr _widget);
-	void buildResourcePlantPressed(MyGUI::WidgetPtr _widget);
-	void buildDistributionPressed(MyGUI::WidgetPtr _widget);
-	void buildMiscPressed(MyGUI::WidgetPtr _widget);
-	void menuPressed(MyGUI::WidgetPtr _widget);
-	void missionPressed(MyGUI::WidgetPtr _widget);
-	void financesPressed(MyGUI::WidgetPtr _widget);
-	void tradePressed(MyGUI::WidgetPtr _widget);
-	void researchPressed(MyGUI::WidgetPtr _widget);
-	void ceoPressed(MyGUI::WidgetPtr _widget);
-	void zoomRotatePressed(MyGUI::WidgetPtr _widget);
-	void demolishPressed(MyGUI::WidgetPtr _widget);
-	void buildPressed(MyGUI::WidgetPtr _widget);
-	void showHideResourcesPressed(MyGUI::WidgetPtr _widget);
+	void question(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void minimapPressed(MyGUI::Widget* _widget, int _left, int _top, MyGUI::MouseButton _button);
+	void minimapDragged(MyGUI::Widget* _widget, int _left, int _top);
+	void minimapButtonPressed(MyGUI::Widget* _widget);
+	void tickerLinePressed(MyGUI::Widget* _widget);
+	void gameSpeedFasterPressed(MyGUI::Widget* _widget);
+	void gameSpeedSlowerPressed(MyGUI::Widget* _widget);
+	void gameSpeedPausePressed(MyGUI::Widget* _widget);
+	void buildPowerPlantPressed(MyGUI::Widget* _widget);
+	void buildResourcePlantPressed(MyGUI::Widget* _widget);
+	void buildDistributionPressed(MyGUI::Widget* _widget);
+	void buildMiscPressed(MyGUI::Widget* _widget);
+	void menuPressed(MyGUI::Widget* _widget);
+	void missionPressed(MyGUI::Widget* _widget);
+	void financesPressed(MyGUI::Widget* _widget);
+	void tradePressed(MyGUI::Widget* _widget);
+	void researchPressed(MyGUI::Widget* _widget);
+	void ceoPressed(MyGUI::Widget* _widget);
+	void zoomRotatePressed(MyGUI::Widget* _widget);
+	void demolishPressed(MyGUI::Widget* _widget);
+	void buildPressed(MyGUI::Widget* _widget);
+	void showHideResourcesPressed(MyGUI::Widget* _widget);
 	void closeWindowPressed(MyGUI::WindowPtr _widget, const std::string& _string);
-	void showPowerNetsWindowPressed(MyGUI::WidgetPtr _widget);
-	void showTickerArchiveWindowPressed(MyGUI::WidgetPtr _widget);
-	void tradeButtonPressed(MyGUI::WidgetPtr _widget);
-	void tradeQuestion(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
+	void showPowerNetsWindowPressed(MyGUI::Widget* _widget);
+	void showTickerArchiveWindowPressed(MyGUI::Widget* _widget);
+	void tradeButtonPressed(MyGUI::Widget* _widget);
+	void tradeQuestion(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
 	void tradeListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void repairButtonPressed(MyGUI::WidgetPtr _widget);
-	void repairQuestion(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
+	void repairButtonPressed(MyGUI::Widget* _widget);
+	void repairQuestion(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
 	void powerNetListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void menuResumeGamePressed(MyGUI::WidgetPtr _widget);
-	void menuExitPressed(MyGUI::WidgetPtr _widget);
-	void menuCreditsPressed(MyGUI::WidgetPtr _widget);
-	void menuOptionsPressed(MyGUI::WidgetPtr _widget);
-	void menuLoadPressed(MyGUI::WidgetPtr _widget);
-	void menuSavePressed(MyGUI::WidgetPtr _widget);
-	void menuNewPressed(MyGUI::WidgetPtr _widget);
-	void menuBackToMainPressed(MyGUI::WidgetPtr _widget);
-	void saveButtonPressed(MyGUI::WidgetPtr _widget);
-	void loadButtonPressed(MyGUI::WidgetPtr _widget);
-	void optionsButtonPressed(MyGUI::WidgetPtr _widget);
-	void newButtonPressed(MyGUI::WidgetPtr _widget);
-	void newListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void saveListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void loadListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void overwrite(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void questionExit(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void unloadAndStartNew(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void unloadAndLoad(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void financesButtonPressed(MyGUI::WidgetPtr _widget);
-	void ceoButtonPressed(MyGUI::WidgetPtr _widget);
+	void menuResumeGamePressed(MyGUI::Widget* _widget);
+	void menuExitPressed(MyGUI::Widget* _widget);
+	void menuCreditsPressed(MyGUI::Widget* _widget);
+	void menuOptionsPressed(MyGUI::Widget* _widget);
+	void menuLoadPressed(MyGUI::Widget* _widget);
+	void menuSavePressed(MyGUI::Widget* _widget);
+	void menuNewPressed(MyGUI::Widget* _widget);
+	void menuBackToMainPressed(MyGUI::Widget* _widget);
+	void saveButtonPressed(MyGUI::Widget* _widget);
+	void loadButtonPressed(MyGUI::Widget* _widget);
+	void optionsButtonPressed(MyGUI::Widget* _widget);
+	void newButtonPressed(MyGUI::Widget* _widget);
+    void newListPressed(MyGUI::ListBox* _sender, size_t index);
+    void saveListPressed(MyGUI::ListBox* _sender, size_t _index);
+    void loadListPressed(MyGUI::ListBox* _sender, size_t _index);
+	void overwrite(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void questionExit(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void unloadAndStartNew(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void unloadAndLoad(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void financesButtonPressed(MyGUI::Widget* _widget);
+	void ceoButtonPressed(MyGUI::Widget* _widget);
 	void ceoTabPressed(MyGUI::TabPtr _widget, size_t _index);
 	void ceoComboPressed(MyGUI::ComboBoxPtr _widget, size_t _index);
-	void buttonDownPressed(MyGUI::WidgetPtr _widget, int, int, MyGUI::MouseButton);
-	void buttonDownReleased(MyGUI::WidgetPtr _widget, int, int, MyGUI::MouseButton);
-	void cityButtonPressed(MyGUI::WidgetPtr _widget);
-	void powerplantButtonPressed(MyGUI::WidgetPtr _widget);
-	void companyButtonPressed(MyGUI::WidgetPtr _widget);
-	void resourceButtonPressed(MyGUI::WidgetPtr _widget);
-	void researchButtonPressed(MyGUI::WidgetPtr _widget);
-	void closeNewspaperPressed(MyGUI::WidgetPtr _widget);
-	void missionButtonPressed(MyGUI::WidgetPtr _widget);
-	void tickerLineMouseOver(MyGUI::WidgetPtr _widget, MyGUI::WidgetPtr _old);
-	void tickerLineMouseOut(MyGUI::WidgetPtr _widget, MyGUI::WidgetPtr _old);
+	void buttonDownPressed(MyGUI::Widget* _widget, int, int, MyGUI::MouseButton);
+	void buttonDownReleased(MyGUI::Widget* _widget, int, int, MyGUI::MouseButton);
+	void cityButtonPressed(MyGUI::Widget* _widget);
+	void powerplantButtonPressed(MyGUI::Widget* _widget);
+	void companyButtonPressed(MyGUI::Widget* _widget);
+	void resourceButtonPressed(MyGUI::Widget* _widget);
+	void researchButtonPressed(MyGUI::Widget* _widget);
+	void closeNewspaperPressed(MyGUI::Widget* _widget);
+	void missionButtonPressed(MyGUI::Widget* _widget);
+	void tickerLineMouseOver(MyGUI::Widget* _widget, MyGUI::Widget* _old);
+	void tickerLineMouseOut(MyGUI::Widget* _widget, MyGUI::Widget* _old);
 	void tickerListPressed(MyGUI::ListPtr _widget, size_t _index);
-	void companyNameOK(MyGUI::WidgetPtr _widget);
+	void companyNameOK(MyGUI::Widget* _widget);
 	void companyNameWOK(MyGUI::WindowPtr _widget, const std::string& _string);
-	void tutorialClosePressed(MyGUI::WidgetPtr _widget);
-	void tutorialContinuePressed(MyGUI::WidgetPtr _widget);
-	void tutorialBackPressed(MyGUI::WidgetPtr _widget);
+	void tutorialClosePressed(MyGUI::Widget* _widget);
+	void tutorialContinuePressed(MyGUI::Widget* _widget);
+	void tutorialBackPressed(MyGUI::Widget* _widget);
 	void tutorialWindowClosePressed(MyGUI::WindowPtr _widget, const std::string& _string);
-	void tutorialCloseQuestion(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void tutorialNextQuestion(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
-	void tutorialShutdownQuestion(MyGUI::MessagePtr _sender, MyGUI::MessageBoxStyle _style);
+	void tutorialCloseQuestion(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void tutorialNextQuestion(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
+	void tutorialShutdownQuestion(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style);
 
 
-	boost::shared_ptr<MyGUI::Gui> mGUI; //!< MyGUI instance
-	std::vector<TickerMessage> mTickerArchive; //!< All ticker messages
-	MyGUI::VectorWidgetPtr mCurrentLayout; //!< Current mygui layout
-	int mTickerIDCounter; //!< ticker counter
+    boost::shared_ptr<MyGUI::Gui> mGUI; //!< MyGUI instance
+    std::vector<TickerMessage> mTickerArchive; //!< All ticker messages
+    MyGUI::VectorWidgetPtr mCurrentLayout; //!< Current mygui layout
+    MyGUI::VectorWidgetPtr mPreviousLayout; //!< Current mygui layout
+    int mTickerIDCounter; //!< ticker counter
 	int mCurrentTerrainWidth;
 	int mCurrentTerrainHeight;
 	eSpeed mCurrentSpeed; //!< Current game speed
 	Ogre::RenderSystem* mRenderSystem; //!< OGRE rendersystem for graphic options
-	bool mGameRunning;
+    MyGUI::OgrePlatform* mPlatform;
+    bool mGameRunning;
 	bool mAskForRestart; //!< Ask for restart on load/new game
 	bool mLastPanVisible;
 	bool mLastTooltipVisible;
-	std::wstring mLastTooltipText;
+    std::string mLastTooltipText;
 	Ogre::Vector2 mLastPanPosition; //!< Recover this when user leaves pan mode
 	boost::shared_ptr<Company> mCompany;
 	bool mShowBuy, mShowSell, mShowGas, mShowCoal, mShowUranium; //!< trade contracts
@@ -374,7 +380,7 @@ private:
 	size_t mResearchIndex;
 	Ogre::Root* mRoot; //!< OGRE root for graphic options
 	bool mLoading; //!< Currently loading?
-	Ogre::UTFString mCurrentTime;
+	Ogre::String mCurrentTime;
 	int mSelectMessage; //!< Ticker line message clicked
 	bool mTickerArchiveLoaded; 
 	size_t mRepairCost;

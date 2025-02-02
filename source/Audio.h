@@ -18,26 +18,26 @@ public:
 	//! Start irrKlang
 	static void start(void) 
 	{
-		mEngine = irrklang::createIrrKlangDevice();
+		//mEngine = irrklang::createIrrKlangDevice();
 	}
 
 	//! Shut it down
 	static void shutdown(void) 
 	{
-		mEngine->drop();
+		//mEngine->drop();
 	}
 
 	//! Start menu music
 	static void setMenu(void) 
 	{
-		mEngine->play2D(GameConfig::getString("MenuMusic").c_str(), true);
+		//mEngine->play2D(GameConfig::getString("MenuMusic").c_str(), true);
 	}
 
 	//! Start game music
 	static void setGame(void) 
 	{
-		mEngine->stopAllSounds();
-		mEngine->play2D(GameConfig::getString("GameMusic").c_str(), true);
+		//mEngine->stopAllSounds();
+		//mEngine->play2D(GameConfig::getString("GameMusic").c_str(), true);
 	}
 
 	//! Play an effect
@@ -48,12 +48,12 @@ public:
 	//! Pause
 	static void pause(bool pPause) 
 	{
-		mEngine->setAllSoundsPaused(pPause);
+		//mEngine->setAllSoundsPaused(pPause);
 	}
 
 private:
 
-	static irrklang::ISoundEngine* mEngine; //!< irrKlang instance
+	//static irrklang::ISoundEngine* mEngine; //!< irrKlang instance
 };
 
 /*-----------------------------------------------------------------------------------------------*/

@@ -49,7 +49,7 @@ Chart::Chart(std::string pName, size_t pWidth, size_t pHeight, size_t pPo2Width,
 		}
 	}
 
-	std::vector<std::string> lResourceGroups = 
+	auto lResourceGroups = 
 		Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
 
 	bool lFound = false;

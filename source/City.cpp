@@ -59,14 +59,14 @@ void City::weekPassed(EventData *pData)
 	double pCustomerConsumption = GameConfig::getDouble("AverageCustomerDemand");
 
 	mConsumption = ((float)mCustomers * pCustomerConsumption) / 1000;
-	
+
 	if ((mCustomers > 0) && (mConsumption == 0))
 		mConsumption = 1;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 
-unsigned int City::getConsumption(void)
+size_t City::getConsumption(void)
 {
 	return mConsumption;
 }
@@ -110,7 +110,7 @@ void City::addSupplier(std::string pSupplier)
 	bool lFound = false;
 
 	for (size_t i = 0; i < mSuppliers.size(); i++) {
-		if (pSupplier.substr(0, pSupplier.find(":")) 
+		if (pSupplier.substr(0, pSupplier.find(":"))
       == mSuppliers[i].substr(0, mSuppliers[i].find(":"))) {
 			mSuppliers[i] = mSuppliers[i].substr(0, mSuppliers[i].find(":") + 2)
 				+ toString(toNumber<int>(pSupplier.substr(pSupplier.find(":")+1))
@@ -217,7 +217,7 @@ void City::addToSceneManager(Ogre::SceneManager* pSceneManager,
 	mStreetNode->scale(Ogre::Vector3(0.72, 0.72, 0.72));
 
 	mNode->scale(Ogre::Vector3(0.8, 0.8, 0.8));
-	mNode->translate( Ogre::Vector3( mPosition.x, lHeight + cCityHeight[getSize()] 
+	mNode->translate( Ogre::Vector3( mPosition.x, lHeight + cCityHeight[getSize()]
 			+ cFloorDistance, mPosition.y));
 	mTransSet.reset(new TransformatorSet(pSceneManager, mNode->getPosition()
 			+ Ogre::Vector3(0.0, -cCityHeight[getSize()] -0.5, 0.0), eCityTrans));
@@ -246,7 +246,7 @@ eGameObjectType City::getType(void)
 
 /*-----------------------------------------------------------------------------------------------*/
 
-Ogre::UTFString City::getName(void)
+Ogre::String City::getName(void)
 {
 	return mName;
 }

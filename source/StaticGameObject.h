@@ -8,7 +8,7 @@
 /*-----------------------------------------------------------------------------------------------*/
 
 class Company;
-class InstancedGeometryManager;
+//class InstancedGeometryManager;
 class Terrain;
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -50,10 +50,10 @@ public:
 	eStaticObjectType getSubType(void);
 
   // Instanced geometry
-	static boost::shared_ptr<InstancedGeometryManager> mTree1Batch;
-	static boost::shared_ptr<InstancedGeometryManager> mTree2Batch;
-	static boost::shared_ptr<InstancedGeometryManager> mTree1FloorBatch;
-	static boost::shared_ptr<InstancedGeometryManager> mTree2FloorBatch;
+    //static boost::shared_ptr<InstancedGeometryManager> mTree1Batch;
+    //static boost::shared_ptr<InstancedGeometryManager> mTree2Batch;
+    //static boost::shared_ptr<InstancedGeometryManager> mTree1FloorBatch;
+    //static boost::shared_ptr<InstancedGeometryManager> mTree2FloorBatch;
 
 private:
 

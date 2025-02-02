@@ -96,16 +96,14 @@ int GameTime::getSpeedInt(void)
 
 /*-----------------------------------------------------------------------------------------------*/
 
-Ogre::UTFString GameTime::getTime(void)
+Ogre::String GameTime::getTime(void)
 {
-	std::wstringstream lTemp, lTemp2;
-	std::wstring lReturn;
+	std::stringstream lTemp, lTemp2;
+	std::string lReturn;
 
-	lTemp << mYear;
-	lReturn += StrLoc::get()->Year() + " " + lTemp.str();
+	lReturn += StrLoc::get()->Year() + " " + std::to_string(mYear);
 
-	lTemp2 << mDay;
-	lReturn += L", " + lTemp2.str() + L". ";
+        lReturn += ", " + std::to_string(mDay) + ". ";
 
 	switch (mMonth) {
 	case 1:
@@ -148,7 +146,7 @@ Ogre::UTFString GameTime::getTime(void)
 		break;
 	}
 	
-	return Ogre::UTFString(lReturn);
+	return Ogre::String(lReturn);
 }
 
 /*-----------------------------------------------------------------------------------------------*/

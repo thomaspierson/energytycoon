@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "GameObject.h"
 #include "Timer.h"
-#include "InstancedGeometryManager.h"
+//#include "InstancedGeometryManager.h"
 #include "StaticGameObject.h"
 #include "Audio.h"
 #include "resource.h"
@@ -16,18 +16,18 @@ size_t GameObject::mIDCounter = 0;
 std::vector<TimerInstance> GameTimer::mTimerInstances;
 boost::shared_ptr<StrLoc> StrLoc::mInstance;
 std::multimap<const eEventType, boost::function<void (EventData*)> > EventHandler::mCallbacks;
-irrklang::ISoundEngine* Audio::mEngine;
-boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree1Batch;
-boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree2Batch;
-boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree1FloorBatch;
-boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree2FloorBatch;
+//irrklang::ISoundEngine* Audio::mEngine;
+//boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree1Batch;
+//boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree2Batch;
+//boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree1FloorBatch;
+//boost::shared_ptr<InstancedGeometryManager> StaticGameObject::mTree2FloorBatch;
 std::map<std::string, std::string> GameConfig::mData;
 std::map<int, std::string> GameConfig::mConversionMap;
 
 /*-----------------------------------------------------------------------------------------------*/
 
 Application::Application(void) :
-	mRoot(0), mWindow(0), mSceneManager(0), mRestart(false), mDebug(false)
+    mRoot(0), mWindow(0), mSceneManager(0), mRestart(false), mDebug(true)
 {
 	REGISTER_CALLBACK(eRestartGame, Application::restartGame);
 }
@@ -124,11 +124,7 @@ void Application::restartGame(EventData* pData)
 
 void Application::setup(void)
 {
-#ifdef WIN32
-  mRoot = OGRE_NEW Ogre::Root("plugins.cfg", "", "ogre.log");
-#else
-  mRoot = OGRE_NEW Ogre::Root("/usr/share/games/energytycoon/plugins.cfg", "", "");
-#endif
+  mRoot = OGRE_NEW Ogre::Root(Constant::cDataDirPre() + "/plugins.cfg", "", "");
   setupResources();
 	parseSettings();
 
@@ -190,11 +186,7 @@ void Application::setup(void)
 void Application::setupResources(void)
 {
 	Ogre::ConfigFile lConfigFile;
-#ifdef WIN32
-	lConfigFile.load("resources.cfg");
-#else
-	lConfigFile.load("/usr/share/games/energytycoon/resources.cfg");
-#endif
+	lConfigFile.load(Constant::cDataDirPre() + "/resources.cfg");
 
     Ogre::ConfigFile::SectionIterator lSectionIterator =
 				lConfigFile.getSectionIterator();
@@ -210,7 +202,6 @@ void Application::setupResources(void)
         for(i = lSettings->begin(); i != lSettings->end(); ++i)  {
             lTypeName = i->first;
             lArchName = i->second;
-
             Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
                 lArchName, lTypeName, lSectionName);
         }
@@ -228,11 +219,7 @@ void Application::loadResources(void)
 
 void Application::parseSettings(void)
 {
-#ifdef WIN32
-	std::ifstream lFile("config.cfg");
-#else
-	std::ifstream lFile("/usr/share/games/energytycoon/config.cfg");
-#endif
+	std::ifstream lFile(Constant::cDataDirPre() + "/config.cfg");
 	std::string lBuffer;
 
 	while (getline(lFile, lBuffer)) {
@@ -317,16 +304,12 @@ int __stdcall WinMain(HINSTANCE pInstance, HINSTANCE, char* ,int)
 int main(int, char**)
 #endif
 {
-#ifdef WIN32
-	GameConfig::load("game.cfg");
-#else
-	GameConfig::load("/usr/share/games/energytycoon/game.cfg");
-#endif
+	GameConfig::load(Constant::cDataDirPre() + "/game.cfg");
 
 #ifdef WIN32
 	DWORD lFileAttributes;
 
-	lFileAttributes = GetFileAttributes("/usr/share/games/energytycoon/lang.cfg");
+	lFileAttributes = GetFileAttributes(Constant::cDataDirPre() + "/lang.cfg");
 	if (lFileAttributes == 0xFFFFFFFF) {
 		DialogBox(pInstance, MAKEINTRESOURCE(IDD_LANGUAGECHOOSER),
 			0, reinterpret_cast<DLGPROC>(LangChooserProc));
@@ -346,11 +329,7 @@ int main(int, char**)
 
 	std::ifstream lFile;
 
-#ifdef WIN32
-	lFile.open("lang.cfg");
-#else
-	lFile.open("/usr/share/games/energytycoon/lang.cfg");
-#endif
+	lFile.open(Constant::cDataDirPre() + "/lang.cfg");
 
 	std::string lLanguage;
 	lFile >> lLanguage;
@@ -364,24 +343,24 @@ int main(int, char**)
 	Audio::start();
 	Application lApplication;
 
-  try {
+  //try {
     lApplication.go();
-  } catch(std::exception& pException) {
+  //} catch(std::exception& pException) {
 #ifdef WIN32
-    MessageBox(NULL, pException.what(), "An exception has occurred!",
-      MB_OK | MB_ICONERROR | MB_TASKMODAL);
+    //MessageBox(NULL, pException.what(), "An exception has occurred!",
+     // MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-    std::cout << "An exception has occured! " << pException.what() << std::endl;
+    //std::cout << "An exception has occured! " << pException.what() << std::endl;
 #endif
-  } catch(...) {
+  //} catch(...) {
 #ifdef WIN32
-    MessageBox(NULL, "Unhandled exception", "An unhandled exception has occurred!",
-      MB_OK | MB_ICONERROR | MB_TASKMODAL);
+   // MessageBox(NULL, "Unhandled exception", "An unhandled exception has occurred!",
+    //  MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-    std::cout << "An unhandled exception has occured! " << std::endl;
+    //std::cout << "An unhandled exception has occured! " << std::endl;
 #endif
-  }
+ // }
 
-	Audio::shutdown();
+    //Audio::shutdown();
   return 0;
 }

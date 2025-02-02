@@ -95,7 +95,7 @@ public:
 	int getEfficiency(void);
 
 	//! Get number of independent subnets
-	size_t getSubnetCount(void);
+    unsigned int getSubnetCount(void);
 
 	//! Return all powerplants in a specific subnet
 	std::vector<boost::shared_ptr<Powerplant> > getSubnetPowerplants(int pSubnetIndex);
