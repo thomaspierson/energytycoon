@@ -110,7 +110,7 @@ namespace ET
       }
     }
     buffer->blitFromMemory(PixelBox(dirtyWidth, dirtyHeight, 1, mFormat, buf),
-      Image::Box(mDirtyX1, mDirtyZ1, mDirtyX2+1, mDirtyZ2+1));
+      Ogre::Box(mDirtyX1, mDirtyZ1, mDirtyX2+1, mDirtyZ2+1));
     delete[] buf;
 
     // reset dirty rect

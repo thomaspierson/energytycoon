@@ -26,7 +26,7 @@ freely, subject to the following restrictions:
 #include "ETEditable.h"
 #include "ETBrush.h"
 #include <cassert>
-#include <OgreRectangle.h>
+#include "OgreRectangle.h"
 
 using namespace Ogre;
 using namespace std;

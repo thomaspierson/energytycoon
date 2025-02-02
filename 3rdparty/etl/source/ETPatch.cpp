@@ -76,7 +76,7 @@ namespace ET
       mMaxLOD = 1;
       mVertexOptions &= (~VO_LODMORPH);
     }
-    mLODChangeMinDistSqr = vector<Real>(mMaxLOD);
+    mLODChangeMinDistSqr = std::vector<Real>(mMaxLOD);
 
     mLastNextLOD = mMaxLOD+1;
 
@@ -310,7 +310,7 @@ namespace ET
     unsigned int patchSizeZ = mDescription->getNumVerticesZ();
 
     // lock delta buffers, if vertex morphing is enabled
-    vector<float*> pDeltas (mMaxLOD-1);
+    std::vector<float*> pDeltas (mMaxLOD-1);
     if (mVertexOptions & VO_LODMORPH)
     {
       for (unsigned int l = 0; l < mMaxLOD-1; ++l)
@@ -321,7 +321,7 @@ namespace ET
     unsigned int cacheStep = 1 << (mMaxLOD-1);
     unsigned int cacheSizeX = patchSizeX / cacheStep;
     unsigned int cacheSizeZ = patchSizeZ / cacheStep;
-    vector<RealArray2D> cache (mMaxLOD-1, RealArray2D(cacheStep+1, cacheStep+1, 0));
+    std::vector<RealArray2D> cache (mMaxLOD-1, RealArray2D(cacheStep+1, cacheStep+1, 0));
     // update all LOD frames which need updating, each frame is cacheStep x cacheStep
     for (VertexList::const_iterator it = dirtyLODFrames.begin(); it != dirtyLODFrames.end(); ++it)
     {
@@ -663,7 +663,7 @@ namespace ET
   Technique* Patch::getTechnique() const
   {
     // based on the current distance to the camera, select the appropriate LOD technique from the material
-    unsigned short lodIndex = mMaterial->getLodIndexSquaredDepth(mCurCameraDistanceSqr);
+    unsigned short lodIndex = mMaterial->getLodIndex(mCurCameraDistanceSqr);
     return mMaterial->getBestTechnique(lodIndex);
   }
 }

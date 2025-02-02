@@ -23,6 +23,7 @@ freely, subject to the following restrictions:
     distribution.
 ********************************************************************************/
 #include "ETShaderGenerator.h"
+#include "OgreHighLevelGpuProgram.h"
 #include <OgreHighLevelGpuProgramManager.h>
 #include <OgreStringConverter.h>
 #include <sstream>
@@ -112,8 +113,6 @@ namespace ET
         vertexHeaderOutput(s, sm, numSplatMaps+numTextures, vertexMorphing);
         vertexBody(s, sm, numSplatMaps, numTextures, patchLocalCoords, vertexMorphing);
         program->setSource(s.str());
-        cout << "Generated vertex shader " << shaderName << ":\n";
-        cout << s.str() << "\n";
         program->load();
         GpuProgramParametersSharedPtr params = program->getDefaultParameters();
         params->setIgnoreMissingParams(true);
@@ -152,8 +151,6 @@ namespace ET
         fragmentHeader(s, sm, numSplatMaps, numTextures);
         fragmentBody(s, sm, format, numSplatMaps, numTextures, startChannel);
         program->setSource(s.str());
-        cout << "Generated fragment shader " << shaderName << ":\n";
-        cout << s.str() << "\n";
         program->load();
       }
         

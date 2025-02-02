@@ -29,12 +29,6 @@ freely, subject to the following restrictions:
 #include <OgreVector3.h>
 #include <OgreVector2.h>
 
-namespace Ogre
-{
-  class Vector3;
-  class Vector2;
-}
-
 namespace ET
 {
   class TerrainListener;

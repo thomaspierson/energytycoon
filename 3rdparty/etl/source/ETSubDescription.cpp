@@ -57,7 +57,7 @@ namespace ET
     {
       // the parent is still active, so unregister as listener and inform own listeners of destruction
       mDescription->removeListener(this);
-      for (vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
+      for (std::vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
         (*it)->notifyDestroyed();
     }
   }
@@ -156,7 +156,7 @@ namespace ET
     if (subList.empty())
       return;
     // notify listeners
-    for (vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
+    for (std::vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
       (*it)->notifyUpdated(subList);
   }
 
@@ -164,7 +164,7 @@ namespace ET
   void SubDescription::notifyDestroyed()
   {
     // notify listeners
-    for (vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
+    for (std::vector<TerrainListener*>::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
       (*it)->notifyDestroyed();
 
     // reset the parent description

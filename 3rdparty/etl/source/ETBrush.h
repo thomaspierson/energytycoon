@@ -27,7 +27,7 @@ freely, subject to the following restrictions:
 
 #include "ETArray2D.h"
 #include "ETCommon.h"
-#include <OgreRectangle.h>
+#include "OgreRectangle.h"
 #include <OgreVector2.h>
 
 

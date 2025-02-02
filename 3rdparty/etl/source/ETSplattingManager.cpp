@@ -139,7 +139,7 @@ namespace ET
     updateMaps = numMaps != mSplattingLayout->getNumSplattingMaps();
 
     // inform listeners about texture list change
-    for (vector<SplattingListener*>::iterator l = mListeners.begin(); l != mListeners.end(); ++l)
+    for (std::vector<SplattingListener*>::iterator l = mListeners.begin(); l != mListeners.end(); ++l)
     {
       (*l)->notifySplattingTextures(mTextures);
       if (updateMaps)
@@ -181,7 +181,7 @@ namespace ET
 
   void SplattingManager::removeListener(SplattingListener* listener)
   {
-    vector<SplattingListener*>::iterator it = find(mListeners.begin(), mListeners.end(), listener);
+    std::vector<SplattingListener*>::iterator it = find(mListeners.begin(), mListeners.end(), listener);
     if (it != mListeners.end())
       mListeners.erase(it);
   }
