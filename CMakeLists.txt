@@ -48,6 +48,11 @@ set(HDRS
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/etl/source/ETTerrainDescription.h
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/etl/source/ETUpdatable.h
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/etl/source/ETUtility.h
+		${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include/MessageBox.h
+		${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include/MessageBoxStyle.h
+		${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include/BaseLayout/Attribute.h
+		${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include/BaseLayout/BaseLayout.h
+		${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include/BaseLayout/WrapsAttribute.h
         ${CMAKE_CURRENT_SOURCE_DIR}/source/Audio.h
 	${CMAKE_CURRENT_SOURCE_DIR}/source/Bezier.h
 	${CMAKE_CURRENT_SOURCE_DIR}/source/Chart.h
@@ -82,11 +87,6 @@ set(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/source/Timer.h
 	${CMAKE_CURRENT_SOURCE_DIR}/source/TransformatorSet.h
 	${CMAKE_CURRENT_SOURCE_DIR}/source/Weather.h
-	${CMAKE_CURRENT_SOURCE_DIR}/source/MessageBox.h
-	${CMAKE_CURRENT_SOURCE_DIR}/source/MessageBoxStyle.h
-	${CMAKE_CURRENT_SOURCE_DIR}/source/BaseLayout/Attribute.h
-	${CMAKE_CURRENT_SOURCE_DIR}/source/BaseLayout/BaseLayout.h
-	${CMAKE_CURRENT_SOURCE_DIR}/source/BaseLayout/WrapsAttribute.h
 )
  
 set(SRCS
@@ -137,9 +137,11 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     ${MyGUI_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${TinyXml_INCLUDE_DIRS}
+	${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/mygui/include
+	${CMAKE_CURRENT_SOURCE_DIR}/source
 )
 
-add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
+add_executable(${PROJECT_NAME} ${HDRS} ${SRCS})
  
 SET(MyGUI_PLATFORM_LIBRARIES "MyGUI.OgrePlatform")
 
