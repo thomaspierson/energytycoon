@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/etl/!svn/ver/50/trunk/EditableTerrain/src
+END
+ETDynamicTexture.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETDynamicTexture.cpp
+END
+ETIndexHandler.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/etl/!svn/ver/44/trunk/EditableTerrain/src/ETIndexHandler.cpp
+END
+ETEditable.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETEditable.cpp
+END
+ETFlatTerrain.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETFlatTerrain.cpp
+END
+ETPage.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETPage.cpp
+END
+ETShaderGenerator.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETShaderGenerator.cpp
+END
+ETBrush.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETBrush.cpp
+END
+ETSplattingMaterial.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETSplattingMaterial.cpp
+END
+ETMovable.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/etl/!svn/ver/49/trunk/EditableTerrain/src/ETMovable.cpp
+END
+ETMovableContainer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/etl/!svn/ver/42/trunk/EditableTerrain/src/ETMovableContainer.cpp
+END
+ETMapGeneration.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/etl/!svn/ver/49/trunk/EditableTerrain/src/ETMapGeneration.cpp
+END
+ETAutoUpdater.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETAutoUpdater.cpp
+END
+ETSubDescription.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETSubDescription.cpp
+END
+ETPatch.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/etl/!svn/ver/48/trunk/EditableTerrain/src/ETPatch.cpp
+END
+ETSplattingManager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETSplattingManager.cpp
+END
+ETSplattingLayout.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/etl/!svn/ver/50/trunk/EditableTerrain/src/ETSplattingLayout.cpp
+END
+ETUtility.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/etl/!svn/ver/41/trunk/EditableTerrain/src/ETUtility.cpp
+END

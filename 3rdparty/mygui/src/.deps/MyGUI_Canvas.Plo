@@ -1,0 +1,1214 @@
+MyGUI_Canvas.lo: MyGUI_Canvas.cpp \
+ ../../MyGUIEngine/include/MyGUI_Precompiled.h \
+ ../../MyGUIEngine/include/MyGUI_Prerequest.h \
+ ../../MyGUIEngine/include/MyGUI_Platform.h \
+ /usr/include/OGRE/OgrePrerequisites.h /usr/include/OGRE/OgrePlatform.h \
+ /usr/include/OGRE/OgreConfig.h /usr/include/c++/4.4/string \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/c++config.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/os_defines.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/cpu_defines.h \
+ /usr/include/c++/4.4/bits/stringfwd.h \
+ /usr/include/c++/4.4/bits/char_traits.h \
+ /usr/include/c++/4.4/bits/stl_algobase.h /usr/include/c++/4.4/cstddef \
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
+ /usr/include/c++/4.4/bits/functexcept.h \
+ /usr/include/c++/4.4/exception_defines.h \
+ /usr/include/c++/4.4/bits/cpp_type_traits.h \
+ /usr/include/c++/4.4/ext/type_traits.h \
+ /usr/include/c++/4.4/ext/numeric_traits.h \
+ /usr/include/c++/4.4/bits/stl_pair.h /usr/include/c++/4.4/bits/move.h \
+ /usr/include/c++/4.4/bits/concept_check.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_types.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/4.4/bits/stl_iterator.h \
+ /usr/include/c++/4.4/debug/debug.h /usr/include/c++/4.4/bits/postypes.h \
+ /usr/include/c++/4.4/cwchar /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h \
+ /usr/include/bits/wchar.h /usr/include/xlocale.h \
+ /usr/include/c++/4.4/bits/allocator.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/c++allocator.h \
+ /usr/include/c++/4.4/ext/new_allocator.h /usr/include/c++/4.4/new \
+ /usr/include/c++/4.4/exception /usr/include/c++/4.4/bits/localefwd.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/c++locale.h \
+ /usr/include/c++/4.4/clocale /usr/include/locale.h \
+ /usr/include/bits/locale.h /usr/include/c++/4.4/iosfwd \
+ /usr/include/c++/4.4/cctype /usr/include/ctype.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/c++/4.4/bits/ostream_insert.h \
+ /usr/include/c++/4.4/cxxabi-forced.h \
+ /usr/include/c++/4.4/bits/stl_function.h \
+ /usr/include/c++/4.4/backward/binders.h \
+ /usr/include/c++/4.4/bits/basic_string.h \
+ /usr/include/c++/4.4/ext/atomicity.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/gthr.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+ /usr/include/bits/sched.h /usr/include/bits/time.h /usr/include/signal.h \
+ /usr/include/bits/sigset.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/setjmp.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/atomic_word.h \
+ /usr/include/c++/4.4/initializer_list \
+ /usr/include/c++/4.4/bits/basic_string.tcc \
+ /usr/include/OGRE/OgreStdHeaders.h /usr/include/c++/4.4/cassert \
+ /usr/include/assert.h /usr/include/c++/4.4/cstdio /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/c++/4.4/cstdlib \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+ /usr/include/c++/4.4/ctime /usr/include/c++/4.4/cstring \
+ /usr/include/string.h /usr/include/c++/4.4/cstdarg \
+ /usr/include/c++/4.4/cmath /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/c++/4.4/bits/cmath.tcc \
+ /usr/include/c++/4.4/vector /usr/include/c++/4.4/bits/stl_construct.h \
+ /usr/include/c++/4.4/bits/stl_uninitialized.h \
+ /usr/include/c++/4.4/bits/stl_vector.h \
+ /usr/include/c++/4.4/bits/stl_bvector.h \
+ /usr/include/c++/4.4/bits/vector.tcc /usr/include/c++/4.4/map \
+ /usr/include/c++/4.4/bits/stl_tree.h /usr/include/c++/4.4/bits/stl_map.h \
+ /usr/include/c++/4.4/bits/stl_multimap.h /usr/include/c++/4.4/set \
+ /usr/include/c++/4.4/bits/stl_set.h \
+ /usr/include/c++/4.4/bits/stl_multiset.h /usr/include/c++/4.4/list \
+ /usr/include/c++/4.4/bits/stl_list.h /usr/include/c++/4.4/bits/list.tcc \
+ /usr/include/c++/4.4/deque /usr/include/c++/4.4/bits/stl_deque.h \
+ /usr/include/c++/4.4/bits/deque.tcc /usr/include/c++/4.4/queue \
+ /usr/include/c++/4.4/bits/stl_heap.h \
+ /usr/include/c++/4.4/bits/stl_queue.h /usr/include/c++/4.4/bitset \
+ /usr/include/c++/4.4/tr1/unordered_map /usr/include/c++/4.4/utility \
+ /usr/include/c++/4.4/bits/stl_relops.h \
+ /usr/include/c++/4.4/tr1/type_traits \
+ /usr/include/c++/4.4/tr1_impl/type_traits \
+ /usr/include/c++/4.4/tr1/functional_hash.h \
+ /usr/include/c++/4.4/tr1_impl/functional_hash.h \
+ /usr/include/c++/4.4/tr1/hashtable.h \
+ /usr/include/c++/4.4/tr1_impl/hashtable \
+ /usr/include/c++/4.4/tr1_impl/hashtable_policy.h \
+ /usr/include/c++/4.4/tr1_impl/unordered_map \
+ /usr/include/c++/4.4/tr1/unordered_set \
+ /usr/include/c++/4.4/tr1_impl/unordered_set \
+ /usr/include/c++/4.4/algorithm /usr/include/c++/4.4/bits/stl_algo.h \
+ /usr/include/c++/4.4/bits/algorithmfwd.h \
+ /usr/include/c++/4.4/bits/stl_tempbuf.h /usr/include/c++/4.4/functional \
+ /usr/include/c++/4.4/limits /usr/include/c++/4.4/fstream \
+ /usr/include/c++/4.4/istream /usr/include/c++/4.4/ios \
+ /usr/include/c++/4.4/bits/ios_base.h \
+ /usr/include/c++/4.4/bits/locale_classes.h \
+ /usr/include/c++/4.4/bits/locale_classes.tcc \
+ /usr/include/c++/4.4/streambuf /usr/include/c++/4.4/bits/streambuf.tcc \
+ /usr/include/c++/4.4/bits/basic_ios.h \
+ /usr/include/c++/4.4/bits/locale_facets.h /usr/include/c++/4.4/cwctype \
+ /usr/include/wctype.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/ctype_base.h \
+ /usr/include/c++/4.4/bits/streambuf_iterator.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/ctype_inline.h \
+ /usr/include/c++/4.4/bits/locale_facets.tcc \
+ /usr/include/c++/4.4/bits/basic_ios.tcc /usr/include/c++/4.4/ostream \
+ /usr/include/c++/4.4/bits/ostream.tcc \
+ /usr/include/c++/4.4/bits/istream.tcc \
+ /usr/include/c++/4.4/bits/codecvt.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/4.4/i486-linux-gnu/bits/c++io.h \
+ /usr/include/c++/4.4/bits/fstream.tcc /usr/include/c++/4.4/iostream \
+ /usr/include/c++/4.4/iomanip /usr/include/c++/4.4/sstream \
+ /usr/include/c++/4.4/bits/sstream.tcc /usr/include/sys/stat.h \
+ /usr/include/bits/stat.h /usr/include/dlfcn.h /usr/include/bits/dlfcn.h \
+ /usr/include/OGRE/OgreMemoryAllocatorConfig.h \
+ /usr/include/OGRE/OgrePrerequisites.h \
+ /usr/include/OGRE/OgreMemoryAllocatedObject.h \
+ /usr/include/OGRE/OgreMemorySTLAllocator.h \
+ /usr/include/OGRE/OgreMemoryNedAlloc.h \
+ ../../MyGUIEngine/include/MyGUI_Utility.h \
+ ../../MyGUIEngine/include/MyGUI_Delegate.h \
+ ../../MyGUIEngine/include/MyGUI_Common.h \
+ ../../MyGUIEngine/include/MyGUI_Macros.h \
+ ../../MyGUIEngine/include/MyGUI_LogManager.h \
+ ../../MyGUIEngine/include/MyGUI_LogStream.h \
+ ../../MyGUIEngine/include/MyGUI_Instance.h \
+ ../../MyGUIEngine/include/MyGUI_Types.h \
+ ../../MyGUIEngine/include/MyGUI_TPoint.h \
+ ../../MyGUIEngine/include/MyGUI_TSize.h \
+ ../../MyGUIEngine/include/MyGUI_TRect.h \
+ ../../MyGUIEngine/include/MyGUI_TCoord.h \
+ ../../MyGUIEngine/include/MyGUI_RenderOut.h \
+ ../../MyGUIEngine/include/MyGUI_ResourcePath.h \
+ /usr/include/OGRE/OgreResourceGroupManager.h \
+ /usr/include/OGRE/OgreSingleton.h /usr/include/OGRE/OgreCommon.h \
+ /usr/include/OGRE/OgreString.h /usr/include/OGRE/OgreDataStream.h \
+ /usr/include/OGRE/OgreSharedPtr.h /usr/include/OGRE/OgreResource.h \
+ /usr/include/OGRE/OgreStringInterface.h \
+ /usr/include/OGRE/OgreAtomicWrappers.h /usr/include/bits/signum.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
+ /usr/include/bits/sigcontext.h /usr/include/bits/sigstack.h \
+ /usr/include/sys/ucontext.h /usr/include/bits/sigthread.h \
+ /usr/include/OGRE/OgreException.h /usr/include/OGRE/OgreArchive.h \
+ /usr/include/OGRE/OgreStringVector.h \
+ /usr/include/OGRE/OgreIteratorWrappers.h \
+ ../../MyGUIEngine/include/MyGUI_LastHeader.h \
+ ../../MyGUIEngine/include/MyGUI_InputDefine.h \
+ ../../MyGUIEngine/include/MyGUI_Version.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetStyle.h /usr/include/OGRE/Ogre.h \
+ /usr/include/OGRE/OgreAnimation.h /usr/include/OGRE/OgreAnimable.h \
+ /usr/include/OGRE/OgreVector2.h /usr/include/OGRE/OgreMath.h \
+ /usr/include/OGRE/OgreVector3.h /usr/include/OGRE/OgreQuaternion.h \
+ /usr/include/OGRE/OgreVector4.h /usr/include/OGRE/OgreColourValue.h \
+ /usr/include/OGRE/OgreAny.h /usr/include/c++/4.4/typeinfo \
+ /usr/include/OGRE/OgreAnimationTrack.h \
+ /usr/include/OGRE/OgreSimpleSpline.h /usr/include/OGRE/OgreMatrix4.h \
+ /usr/include/OGRE/OgreMatrix3.h /usr/include/OGRE/OgrePlane.h \
+ /usr/include/OGRE/OgreRotationalSpline.h \
+ /usr/include/OGRE/OgreKeyFrame.h \
+ /usr/include/OGRE/OgreHardwareVertexBuffer.h \
+ /usr/include/OGRE/OgreHardwareBuffer.h /usr/include/OGRE/OgrePose.h \
+ /usr/include/OGRE/OgreAnimationState.h \
+ /usr/include/OGRE/OgreController.h \
+ /usr/include/OGRE/OgreArchiveManager.h \
+ /usr/include/OGRE/OgreResourceManager.h \
+ /usr/include/OGRE/OgreResourceGroupManager.h \
+ /usr/include/OGRE/OgreScriptLoader.h \
+ /usr/include/OGRE/OgreAxisAlignedBox.h \
+ /usr/include/OGRE/OgreBillboardChain.h \
+ /usr/include/OGRE/OgreMovableObject.h \
+ /usr/include/OGRE/OgreRenderQueue.h /usr/include/OGRE/OgreSphere.h \
+ /usr/include/OGRE/OgreShadowCaster.h /usr/include/OGRE/OgreRenderable.h \
+ /usr/include/OGRE/OgreRenderOperation.h \
+ /usr/include/OGRE/OgreVertexIndexData.h \
+ /usr/include/OGRE/OgreHardwareIndexBuffer.h \
+ /usr/include/OGRE/OgreMaterial.h /usr/include/OGRE/OgreBlendMode.h \
+ /usr/include/OGRE/OgreGpuProgram.h /usr/include/OGRE/OgreSerializer.h \
+ /usr/include/OGRE/OgreFactoryObj.h \
+ /usr/include/OGRE/OgreUserDefinedObject.h \
+ /usr/include/OGRE/OgreBillboardSet.h /usr/include/OGRE/OgreRadixSort.h \
+ /usr/include/OGRE/OgreBone.h /usr/include/OGRE/OgreNode.h \
+ /usr/include/OGRE/OgreCamera.h /usr/include/OGRE/OgreFrustum.h \
+ /usr/include/OGRE/OgreMovablePlane.h /usr/include/OGRE/OgreRay.h \
+ /usr/include/OGRE/OgrePlaneBoundedVolume.h \
+ /usr/include/OGRE/OgreConfigFile.h \
+ /usr/include/OGRE/OgreControllerManager.h \
+ /usr/include/OGRE/OgrePredefinedControllers.h \
+ /usr/include/OGRE/OgreFrameListener.h \
+ /usr/include/OGRE/OgreTextureUnitState.h /usr/include/OGRE/OgreTexture.h \
+ /usr/include/OGRE/OgreImage.h /usr/include/OGRE/OgrePixelFormat.h \
+ /usr/include/OGRE/OgreEntity.h \
+ /usr/include/OGRE/OgreHardwareBufferManager.h \
+ /usr/include/OGRE/OgreRenderToVertexBuffer.h \
+ /usr/include/OGRE/OgreMesh.h \
+ /usr/include/OGRE/OgreVertexBoneAssignment.h \
+ /usr/include/OGRE/OgreProgressiveMesh.h /usr/include/OGRE/OgreSkeleton.h \
+ /usr/include/OGRE/OgreGpuProgramManager.h \
+ /usr/include/OGRE/OgreHardwarePixelBuffer.h \
+ /usr/include/OGRE/OgreHardwareOcclusionQuery.h \
+ /usr/include/OGRE/OgreHighLevelGpuProgram.h \
+ /usr/include/OGRE/OgreHighLevelGpuProgramManager.h \
+ /usr/include/OGRE/OgreLight.h /usr/include/OGRE/OgreShadowCameraSetup.h \
+ /usr/include/OGRE/OgreLogManager.h /usr/include/OGRE/OgreLog.h \
+ /usr/include/OGRE/OgreManualObject.h \
+ /usr/include/OGRE/OgreMaterialManager.h \
+ /usr/include/OGRE/OgreMaterialSerializer.h \
+ /usr/include/OGRE/OgreMeshManager.h /usr/include/OGRE/OgrePatchMesh.h \
+ /usr/include/OGRE/OgrePatchSurface.h \
+ /usr/include/OGRE/OgreMeshSerializer.h \
+ /usr/include/OGRE/OgreMeshSerializerImpl.h \
+ /usr/include/OGRE/OgreEdgeListBuilder.h /usr/include/OGRE/OgreOverlay.h \
+ /usr/include/OGRE/OgreSceneNode.h \
+ /usr/include/OGRE/OgreOverlayContainer.h \
+ /usr/include/OGRE/OgreOverlayElement.h /usr/include/OGRE/OgreUTFString.h \
+ /usr/include/c++/4.4/iterator \
+ /usr/include/c++/4.4/bits/stream_iterator.h \
+ /usr/include/c++/4.4/stdexcept \
+ /usr/include/OGRE/OgreOverlayElementCommands.h \
+ /usr/include/OGRE/OgreRectangle.h /usr/include/OGRE/OgreOverlayManager.h \
+ /usr/include/OGRE/OgreParticleAffector.h \
+ /usr/include/OGRE/OgreParticleEmitter.h \
+ /usr/include/OGRE/OgreParticleEmitterCommands.h \
+ /usr/include/OGRE/OgreParticle.h /usr/include/OGRE/OgreBillboard.h \
+ /usr/include/OGRE/OgreParticleSystemManager.h \
+ /usr/include/OGRE/OgreParticleSystem.h \
+ /usr/include/OGRE/OgreParticleIterator.h /usr/include/OGRE/OgrePass.h \
+ /usr/include/OGRE/OgreProfiler.h \
+ /usr/include/OGRE/OgreRenderQueueInvocation.h \
+ /usr/include/OGRE/OgreRenderQueueSortingGrouping.h \
+ /usr/include/OGRE/OgreTechnique.h \
+ /usr/include/OGRE/OgreRenderSystemCapabilities.h \
+ /usr/include/OGRE/OgreStringConverter.h \
+ /usr/include/OGRE/OgreRenderQueueListener.h \
+ /usr/include/OGRE/OgreRenderSystem.h \
+ /usr/include/OGRE/OgreRenderTarget.h \
+ /usr/include/OGRE/OgreTextureManager.h /usr/include/OGRE/OgreViewport.h \
+ /usr/include/OGRE/OgreTimer.h /usr/include/OGRE/GLX/OgreTimerImp.h \
+ /usr/include/OGRE/GLX/../OgrePrerequisites.h \
+ /usr/include/OGRE/OgreRenderTexture.h \
+ /usr/include/OGRE/OgreConfigOptionMap.h \
+ /usr/include/OGRE/OgreRenderTargetListener.h \
+ /usr/include/OGRE/OgreRenderWindow.h \
+ /usr/include/OGRE/OgreResourceBackgroundQueue.h \
+ /usr/include/OGRE/OgreRibbonTrail.h /usr/include/OGRE/OgreRoot.h \
+ /usr/include/OGRE/OgreSceneManagerEnumerator.h \
+ /usr/include/OGRE/OgreSceneManager.h /usr/include/OGRE/OgreSceneQuery.h \
+ /usr/include/OGRE/OgreAutoParamDataSource.h \
+ /usr/include/OGRE/OgreRectangle2D.h \
+ /usr/include/OGRE/OgreSimpleRenderable.h \
+ /usr/include/OGRE/OgreShadowTextureManager.h \
+ /usr/include/OGRE/OgreInstancedGeometry.h \
+ /usr/include/OGRE/OgreSkeletonInstance.h \
+ /usr/include/OGRE/OgreSkeletonManager.h \
+ /usr/include/OGRE/OgreSkeletonSerializer.h \
+ /usr/include/OGRE/OgreStaticGeometry.h /usr/include/OGRE/OgreSubEntity.h \
+ /usr/include/OGRE/OgreSubMesh.h /usr/include/OGRE/OgreCompositor.h \
+ /usr/include/OGRE/OgreCompositorManager.h \
+ /usr/include/OGRE/OgreCompositorSerializer.h \
+ /usr/include/OGRE/OgreCompositorChain.h \
+ /usr/include/OGRE/OgreCompositorInstance.h \
+ /usr/include/OGRE/OgreCompositionTechnique.h \
+ /usr/include/OGRE/OgreCompositionPass.h \
+ /usr/include/OGRE/OgreCompositionTargetPass.h \
+ /usr/include/OGRE/OgreWindowEventUtilities.h \
+ /usr/include/OGRE/OgreShadowCameraSetupFocused.h \
+ /usr/include/OGRE/OgrePolygon.h /usr/include/OGRE/OgreConvexBody.h \
+ /usr/include/OGRE/OgreShadowCameraSetupLiSPSM.h \
+ /usr/include/OGRE/OgreShadowCameraSetupPlaneOptimal.h \
+ /usr/include/OGRE/OgreShadowCameraSetupPSSM.h \
+ ../../MyGUIEngine/include/MyGUI_DelegateImplement.h \
+ ../../MyGUIEngine/include/MyGUI_Any.h \
+ ../../MyGUIEngine/include/MyGUI_IResource.h \
+ ../../MyGUIEngine/include/MyGUI_Rtti.h \
+ ../../MyGUIEngine/include/MyGUI_XmlDocument.h \
+ ../../MyGUIEngine/include/MyGUI_Convert.h \
+ /usr/include/OGRE/OgreDataStream.h /usr/include/OGRE/OgreUTFString.h \
+ ../../MyGUIEngine/include/MyGUI_Guid.h \
+ ../../MyGUIEngine/include/MyGUI_ActionController.h \
+ ../../MyGUIEngine/include/MyGUI_ControllerEdgeHide.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetDefines.h \
+ ../../MyGUIEngine/include/MyGUI_Enumerator.h \
+ ../../MyGUIEngine/include/MyGUI_ControllerItem.h \
+ ../../MyGUIEngine/include/MyGUI_ControllerFadeAlpha.h \
+ ../../MyGUIEngine/include/MyGUI_ControllerPosition.h \
+ ../../MyGUIEngine/include/MyGUI_CastWidget.h \
+ ../../MyGUIEngine/include/MyGUI_Widget.h \
+ ../../MyGUIEngine/include/MyGUI_ICroppedRectangle.h \
+ ../../MyGUIEngine/include/MyGUI_Align.h \
+ ../../MyGUIEngine/include/MyGUI_ISubWidgetRect.h \
+ ../../MyGUIEngine/include/MyGUI_ISubWidget.h \
+ ../../MyGUIEngine/include/MyGUI_DrawItem.h \
+ ../../MyGUIEngine/include/MyGUI_ISubWidgetText.h \
+ ../../MyGUIEngine/include/MyGUI_Colour.h \
+ /usr/include/OGRE/OgreColourValue.h \
+ ../../MyGUIEngine/include/MyGUI_LayerItem.h \
+ ../../MyGUIEngine/include/MyGUI_LayerManager.h \
+ ../../MyGUIEngine/include/MyGUI_IUnlinkWidget.h \
+ ../../MyGUIEngine/include/MyGUI_ResourceManager.h \
+ /usr/include/OGRE/OgreRenderQueueListener.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetUserData.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetEvent.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetToolTip.h \
+ ../../MyGUIEngine/include/MyGUI_IWidgetCreator.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetSkinInfo.h \
+ ../../MyGUIEngine/include/MyGUI_SubWidgetBinding.h \
+ ../../MyGUIEngine/include/MyGUI_ChildSkinInfo.h \
+ ../../MyGUIEngine/include/MyGUI_MaskPickInfo.h \
+ ../../MyGUIEngine/include/MyGUI_Canvas.h \
+ ../../MyGUIEngine/include/MyGUI_ResourceManager.h \
+ ../../MyGUIEngine/include/MyGUI_Gui.h \
+ ../../MyGUIEngine/include/MyGUI_WidgetOIS.h /usr/include/OIS/OIS.h \
+ /usr/include/OIS/OISPrereqs.h /usr/include/OIS/OISConfig.h \
+ /usr/include/OIS/OISObject.h /usr/include/OIS/OISInterface.h \
+ /usr/include/OIS/OISMouse.h /usr/include/OIS/OISEvents.h \
+ /usr/include/OIS/OISKeyboard.h /usr/include/OIS/OISJoyStick.h \
+ /usr/include/OIS/OISInputManager.h /usr/include/OIS/OISFactoryCreator.h \
+ /usr/include/OIS/OISException.h /usr/include/OIS/OISEffect.h \
+ /usr/include/OIS/OISForceFeedback.h
+
+../../MyGUIEngine/include/MyGUI_Precompiled.h:
+
+../../MyGUIEngine/include/MyGUI_Prerequest.h:
+
+../../MyGUIEngine/include/MyGUI_Platform.h:
+
+/usr/include/OGRE/OgrePrerequisites.h:
+
+/usr/include/OGRE/OgrePlatform.h:
+
+/usr/include/OGRE/OgreConfig.h:
+
+/usr/include/c++/4.4/string:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/c++config.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/os_defines.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/cpu_defines.h:
+
+/usr/include/c++/4.4/bits/stringfwd.h:
+
+/usr/include/c++/4.4/bits/char_traits.h:
+
+/usr/include/c++/4.4/bits/stl_algobase.h:
+
+/usr/include/c++/4.4/cstddef:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
+
+/usr/include/c++/4.4/bits/functexcept.h:
+
+/usr/include/c++/4.4/exception_defines.h:
+
+/usr/include/c++/4.4/bits/cpp_type_traits.h:
+
+/usr/include/c++/4.4/ext/type_traits.h:
+
+/usr/include/c++/4.4/ext/numeric_traits.h:
+
+/usr/include/c++/4.4/bits/stl_pair.h:
+
+/usr/include/c++/4.4/bits/move.h:
+
+/usr/include/c++/4.4/bits/concept_check.h:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/4.4/bits/stl_iterator.h:
+
+/usr/include/c++/4.4/debug/debug.h:
+
+/usr/include/c++/4.4/bits/postypes.h:
+
+/usr/include/c++/4.4/cwchar:
+
+/usr/include/wchar.h:
+
+/usr/include/stdio.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/c++/4.4/bits/allocator.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/c++allocator.h:
+
+/usr/include/c++/4.4/ext/new_allocator.h:
+
+/usr/include/c++/4.4/new:
+
+/usr/include/c++/4.4/exception:
+
+/usr/include/c++/4.4/bits/localefwd.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/c++locale.h:
+
+/usr/include/c++/4.4/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+/usr/include/c++/4.4/iosfwd:
+
+/usr/include/c++/4.4/cctype:
+
+/usr/include/ctype.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/c++/4.4/bits/ostream_insert.h:
+
+/usr/include/c++/4.4/cxxabi-forced.h:
+
+/usr/include/c++/4.4/bits/stl_function.h:
+
+/usr/include/c++/4.4/backward/binders.h:
+
+/usr/include/c++/4.4/bits/basic_string.h:
+
+/usr/include/c++/4.4/ext/atomicity.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/gthr.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/gthr-default.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/time.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/signal.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/atomic_word.h:
+
+/usr/include/c++/4.4/initializer_list:
+
+/usr/include/c++/4.4/bits/basic_string.tcc:
+
+/usr/include/OGRE/OgreStdHeaders.h:
+
+/usr/include/c++/4.4/cassert:
+
+/usr/include/assert.h:
+
+/usr/include/c++/4.4/cstdio:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/c++/4.4/cstdlib:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/4.4/ctime:
+
+/usr/include/c++/4.4/cstring:
+
+/usr/include/string.h:
+
+/usr/include/c++/4.4/cstdarg:
+
+/usr/include/c++/4.4/cmath:
+
+/usr/include/math.h:
+
+/usr/include/bits/huge_val.h:
+
+/usr/include/bits/huge_valf.h:
+
+/usr/include/bits/huge_vall.h:
+
+/usr/include/bits/inf.h:
+
+/usr/include/bits/nan.h:
+
+/usr/include/bits/mathdef.h:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/c++/4.4/bits/cmath.tcc:
+
+/usr/include/c++/4.4/vector:
+
+/usr/include/c++/4.4/bits/stl_construct.h:
+
+/usr/include/c++/4.4/bits/stl_uninitialized.h:
+
+/usr/include/c++/4.4/bits/stl_vector.h:
+
+/usr/include/c++/4.4/bits/stl_bvector.h:
+
+/usr/include/c++/4.4/bits/vector.tcc:
+
+/usr/include/c++/4.4/map:
+
+/usr/include/c++/4.4/bits/stl_tree.h:
+
+/usr/include/c++/4.4/bits/stl_map.h:
+
+/usr/include/c++/4.4/bits/stl_multimap.h:
+
+/usr/include/c++/4.4/set:
+
+/usr/include/c++/4.4/bits/stl_set.h:
+
+/usr/include/c++/4.4/bits/stl_multiset.h:
+
+/usr/include/c++/4.4/list:
+
+/usr/include/c++/4.4/bits/stl_list.h:
+
+/usr/include/c++/4.4/bits/list.tcc:
+
+/usr/include/c++/4.4/deque:
+
+/usr/include/c++/4.4/bits/stl_deque.h:
+
+/usr/include/c++/4.4/bits/deque.tcc:
+
+/usr/include/c++/4.4/queue:
+
+/usr/include/c++/4.4/bits/stl_heap.h:
+
+/usr/include/c++/4.4/bits/stl_queue.h:
+
+/usr/include/c++/4.4/bitset:
+
+/usr/include/c++/4.4/tr1/unordered_map:
+
+/usr/include/c++/4.4/utility:
+
+/usr/include/c++/4.4/bits/stl_relops.h:
+
+/usr/include/c++/4.4/tr1/type_traits:
+
+/usr/include/c++/4.4/tr1_impl/type_traits:
+
+/usr/include/c++/4.4/tr1/functional_hash.h:
+
+/usr/include/c++/4.4/tr1_impl/functional_hash.h:
+
+/usr/include/c++/4.4/tr1/hashtable.h:
+
+/usr/include/c++/4.4/tr1_impl/hashtable:
+
+/usr/include/c++/4.4/tr1_impl/hashtable_policy.h:
+
+/usr/include/c++/4.4/tr1_impl/unordered_map:
+
+/usr/include/c++/4.4/tr1/unordered_set:
+
+/usr/include/c++/4.4/tr1_impl/unordered_set:
+
+/usr/include/c++/4.4/algorithm:
+
+/usr/include/c++/4.4/bits/stl_algo.h:
+
+/usr/include/c++/4.4/bits/algorithmfwd.h:
+
+/usr/include/c++/4.4/bits/stl_tempbuf.h:
+
+/usr/include/c++/4.4/functional:
+
+/usr/include/c++/4.4/limits:
+
+/usr/include/c++/4.4/fstream:
+
+/usr/include/c++/4.4/istream:
+
+/usr/include/c++/4.4/ios:
+
+/usr/include/c++/4.4/bits/ios_base.h:
+
+/usr/include/c++/4.4/bits/locale_classes.h:
+
+/usr/include/c++/4.4/bits/locale_classes.tcc:
+
+/usr/include/c++/4.4/streambuf:
+
+/usr/include/c++/4.4/bits/streambuf.tcc:
+
+/usr/include/c++/4.4/bits/basic_ios.h:
+
+/usr/include/c++/4.4/bits/locale_facets.h:
+
+/usr/include/c++/4.4/cwctype:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/ctype_base.h:
+
+/usr/include/c++/4.4/bits/streambuf_iterator.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/ctype_inline.h:
+
+/usr/include/c++/4.4/bits/locale_facets.tcc:
+
+/usr/include/c++/4.4/bits/basic_ios.tcc:
+
+/usr/include/c++/4.4/ostream:
+
+/usr/include/c++/4.4/bits/ostream.tcc:
+
+/usr/include/c++/4.4/bits/istream.tcc:
+
+/usr/include/c++/4.4/bits/codecvt.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/basic_file.h:
+
+/usr/include/c++/4.4/i486-linux-gnu/bits/c++io.h:
+
+/usr/include/c++/4.4/bits/fstream.tcc:
+
+/usr/include/c++/4.4/iostream:
+
+/usr/include/c++/4.4/iomanip:
+
+/usr/include/c++/4.4/sstream:
+
+/usr/include/c++/4.4/bits/sstream.tcc:
+
+/usr/include/sys/stat.h:
+
+/usr/include/bits/stat.h:
+
+/usr/include/dlfcn.h:
+
+/usr/include/bits/dlfcn.h:
+
+/usr/include/OGRE/OgreMemoryAllocatorConfig.h:
+
+/usr/include/OGRE/OgrePrerequisites.h:
+
+/usr/include/OGRE/OgreMemoryAllocatedObject.h:
+
+/usr/include/OGRE/OgreMemorySTLAllocator.h:
+
+/usr/include/OGRE/OgreMemoryNedAlloc.h:
+
+../../MyGUIEngine/include/MyGUI_Utility.h:
+
+../../MyGUIEngine/include/MyGUI_Delegate.h:
+
+../../MyGUIEngine/include/MyGUI_Common.h:
+
+../../MyGUIEngine/include/MyGUI_Macros.h:
+
+../../MyGUIEngine/include/MyGUI_LogManager.h:
+
+../../MyGUIEngine/include/MyGUI_LogStream.h:
+
+../../MyGUIEngine/include/MyGUI_Instance.h:
+
+../../MyGUIEngine/include/MyGUI_Types.h:
+
+../../MyGUIEngine/include/MyGUI_TPoint.h:
+
+../../MyGUIEngine/include/MyGUI_TSize.h:
+
+../../MyGUIEngine/include/MyGUI_TRect.h:
+
+../../MyGUIEngine/include/MyGUI_TCoord.h:
+
+../../MyGUIEngine/include/MyGUI_RenderOut.h:
+
+../../MyGUIEngine/include/MyGUI_ResourcePath.h:
+
+/usr/include/OGRE/OgreResourceGroupManager.h:
+
+/usr/include/OGRE/OgreSingleton.h:
+
+/usr/include/OGRE/OgreCommon.h:
+
+/usr/include/OGRE/OgreString.h:
+
+/usr/include/OGRE/OgreDataStream.h:
+
+/usr/include/OGRE/OgreSharedPtr.h:
+
+/usr/include/OGRE/OgreResource.h:
+
+/usr/include/OGRE/OgreStringInterface.h:
+
+/usr/include/OGRE/OgreAtomicWrappers.h:
+
+/usr/include/bits/signum.h:
+
+/usr/include/bits/siginfo.h:
+
+/usr/include/bits/sigaction.h:
+
+/usr/include/bits/sigcontext.h:
+
+/usr/include/bits/sigstack.h:
+
+/usr/include/sys/ucontext.h:
+
+/usr/include/bits/sigthread.h:
+
+/usr/include/OGRE/OgreException.h:
+
+/usr/include/OGRE/OgreArchive.h:
+
+/usr/include/OGRE/OgreStringVector.h:
+
+/usr/include/OGRE/OgreIteratorWrappers.h:
+
+../../MyGUIEngine/include/MyGUI_LastHeader.h:
+
+../../MyGUIEngine/include/MyGUI_InputDefine.h:
+
+../../MyGUIEngine/include/MyGUI_Version.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetStyle.h:
+
+/usr/include/OGRE/Ogre.h:
+
+/usr/include/OGRE/OgreAnimation.h:
+
+/usr/include/OGRE/OgreAnimable.h:
+
+/usr/include/OGRE/OgreVector2.h:
+
+/usr/include/OGRE/OgreMath.h:
+
+/usr/include/OGRE/OgreVector3.h:
+
+/usr/include/OGRE/OgreQuaternion.h:
+
+/usr/include/OGRE/OgreVector4.h:
+
+/usr/include/OGRE/OgreColourValue.h:
+
+/usr/include/OGRE/OgreAny.h:
+
+/usr/include/c++/4.4/typeinfo:
+
+/usr/include/OGRE/OgreAnimationTrack.h:
+
+/usr/include/OGRE/OgreSimpleSpline.h:
+
+/usr/include/OGRE/OgreMatrix4.h:
+
+/usr/include/OGRE/OgreMatrix3.h:
+
+/usr/include/OGRE/OgrePlane.h:
+
+/usr/include/OGRE/OgreRotationalSpline.h:
+
+/usr/include/OGRE/OgreKeyFrame.h:
+
+/usr/include/OGRE/OgreHardwareVertexBuffer.h:
+
+/usr/include/OGRE/OgreHardwareBuffer.h:
+
+/usr/include/OGRE/OgrePose.h:
+
+/usr/include/OGRE/OgreAnimationState.h:
+
+/usr/include/OGRE/OgreController.h:
+
+/usr/include/OGRE/OgreArchiveManager.h:
+
+/usr/include/OGRE/OgreResourceManager.h:
+
+/usr/include/OGRE/OgreResourceGroupManager.h:
+
+/usr/include/OGRE/OgreScriptLoader.h:
+
+/usr/include/OGRE/OgreAxisAlignedBox.h:
+
+/usr/include/OGRE/OgreBillboardChain.h:
+
+/usr/include/OGRE/OgreMovableObject.h:
+
+/usr/include/OGRE/OgreRenderQueue.h:
+
+/usr/include/OGRE/OgreSphere.h:
+
+/usr/include/OGRE/OgreShadowCaster.h:
+
+/usr/include/OGRE/OgreRenderable.h:
+
+/usr/include/OGRE/OgreRenderOperation.h:
+
+/usr/include/OGRE/OgreVertexIndexData.h:
+
+/usr/include/OGRE/OgreHardwareIndexBuffer.h:
+
+/usr/include/OGRE/OgreMaterial.h:
+
+/usr/include/OGRE/OgreBlendMode.h:
+
+/usr/include/OGRE/OgreGpuProgram.h:
+
+/usr/include/OGRE/OgreSerializer.h:
+
+/usr/include/OGRE/OgreFactoryObj.h:
+
+/usr/include/OGRE/OgreUserDefinedObject.h:
+
+/usr/include/OGRE/OgreBillboardSet.h:
+
+/usr/include/OGRE/OgreRadixSort.h:
+
+/usr/include/OGRE/OgreBone.h:
+
+/usr/include/OGRE/OgreNode.h:
+
+/usr/include/OGRE/OgreCamera.h:
+
+/usr/include/OGRE/OgreFrustum.h:
+
+/usr/include/OGRE/OgreMovablePlane.h:
+
+/usr/include/OGRE/OgreRay.h:
+
+/usr/include/OGRE/OgrePlaneBoundedVolume.h:
+
+/usr/include/OGRE/OgreConfigFile.h:
+
+/usr/include/OGRE/OgreControllerManager.h:
+
+/usr/include/OGRE/OgrePredefinedControllers.h:
+
+/usr/include/OGRE/OgreFrameListener.h:
+
+/usr/include/OGRE/OgreTextureUnitState.h:
+
+/usr/include/OGRE/OgreTexture.h:
+
+/usr/include/OGRE/OgreImage.h:
+
+/usr/include/OGRE/OgrePixelFormat.h:
+
+/usr/include/OGRE/OgreEntity.h:
+
+/usr/include/OGRE/OgreHardwareBufferManager.h:
+
+/usr/include/OGRE/OgreRenderToVertexBuffer.h:
+
+/usr/include/OGRE/OgreMesh.h:
+
+/usr/include/OGRE/OgreVertexBoneAssignment.h:
+
+/usr/include/OGRE/OgreProgressiveMesh.h:
+
+/usr/include/OGRE/OgreSkeleton.h:
+
+/usr/include/OGRE/OgreGpuProgramManager.h:
+
+/usr/include/OGRE/OgreHardwarePixelBuffer.h:
+
+/usr/include/OGRE/OgreHardwareOcclusionQuery.h:
+
+/usr/include/OGRE/OgreHighLevelGpuProgram.h:
+
+/usr/include/OGRE/OgreHighLevelGpuProgramManager.h:
+
+/usr/include/OGRE/OgreLight.h:
+
+/usr/include/OGRE/OgreShadowCameraSetup.h:
+
+/usr/include/OGRE/OgreLogManager.h:
+
+/usr/include/OGRE/OgreLog.h:
+
+/usr/include/OGRE/OgreManualObject.h:
+
+/usr/include/OGRE/OgreMaterialManager.h:
+
+/usr/include/OGRE/OgreMaterialSerializer.h:
+
+/usr/include/OGRE/OgreMeshManager.h:
+
+/usr/include/OGRE/OgrePatchMesh.h:
+
+/usr/include/OGRE/OgrePatchSurface.h:
+
+/usr/include/OGRE/OgreMeshSerializer.h:
+
+/usr/include/OGRE/OgreMeshSerializerImpl.h:
+
+/usr/include/OGRE/OgreEdgeListBuilder.h:
+
+/usr/include/OGRE/OgreOverlay.h:
+
+/usr/include/OGRE/OgreSceneNode.h:
+
+/usr/include/OGRE/OgreOverlayContainer.h:
+
+/usr/include/OGRE/OgreOverlayElement.h:
+
+/usr/include/OGRE/OgreUTFString.h:
+
+/usr/include/c++/4.4/iterator:
+
+/usr/include/c++/4.4/bits/stream_iterator.h:
+
+/usr/include/c++/4.4/stdexcept:
+
+/usr/include/OGRE/OgreOverlayElementCommands.h:
+
+/usr/include/OGRE/OgreRectangle.h:
+
+/usr/include/OGRE/OgreOverlayManager.h:
+
+/usr/include/OGRE/OgreParticleAffector.h:
+
+/usr/include/OGRE/OgreParticleEmitter.h:
+
+/usr/include/OGRE/OgreParticleEmitterCommands.h:
+
+/usr/include/OGRE/OgreParticle.h:
+
+/usr/include/OGRE/OgreBillboard.h:
+
+/usr/include/OGRE/OgreParticleSystemManager.h:
+
+/usr/include/OGRE/OgreParticleSystem.h:
+
+/usr/include/OGRE/OgreParticleIterator.h:
+
+/usr/include/OGRE/OgrePass.h:
+
+/usr/include/OGRE/OgreProfiler.h:
+
+/usr/include/OGRE/OgreRenderQueueInvocation.h:
+
+/usr/include/OGRE/OgreRenderQueueSortingGrouping.h:
+
+/usr/include/OGRE/OgreTechnique.h:
+
+/usr/include/OGRE/OgreRenderSystemCapabilities.h:
+
+/usr/include/OGRE/OgreStringConverter.h:
+
+/usr/include/OGRE/OgreRenderQueueListener.h:
+
+/usr/include/OGRE/OgreRenderSystem.h:
+
+/usr/include/OGRE/OgreRenderTarget.h:
+
+/usr/include/OGRE/OgreTextureManager.h:
+
+/usr/include/OGRE/OgreViewport.h:
+
+/usr/include/OGRE/OgreTimer.h:
+
+/usr/include/OGRE/GLX/OgreTimerImp.h:
+
+/usr/include/OGRE/GLX/../OgrePrerequisites.h:
+
+/usr/include/OGRE/OgreRenderTexture.h:
+
+/usr/include/OGRE/OgreConfigOptionMap.h:
+
+/usr/include/OGRE/OgreRenderTargetListener.h:
+
+/usr/include/OGRE/OgreRenderWindow.h:
+
+/usr/include/OGRE/OgreResourceBackgroundQueue.h:
+
+/usr/include/OGRE/OgreRibbonTrail.h:
+
+/usr/include/OGRE/OgreRoot.h:
+
+/usr/include/OGRE/OgreSceneManagerEnumerator.h:
+
+/usr/include/OGRE/OgreSceneManager.h:
+
+/usr/include/OGRE/OgreSceneQuery.h:
+
+/usr/include/OGRE/OgreAutoParamDataSource.h:
+
+/usr/include/OGRE/OgreRectangle2D.h:
+
+/usr/include/OGRE/OgreSimpleRenderable.h:
+
+/usr/include/OGRE/OgreShadowTextureManager.h:
+
+/usr/include/OGRE/OgreInstancedGeometry.h:
+
+/usr/include/OGRE/OgreSkeletonInstance.h:
+
+/usr/include/OGRE/OgreSkeletonManager.h:
+
+/usr/include/OGRE/OgreSkeletonSerializer.h:
+
+/usr/include/OGRE/OgreStaticGeometry.h:
+
+/usr/include/OGRE/OgreSubEntity.h:
+
+/usr/include/OGRE/OgreSubMesh.h:
+
+/usr/include/OGRE/OgreCompositor.h:
+
+/usr/include/OGRE/OgreCompositorManager.h:
+
+/usr/include/OGRE/OgreCompositorSerializer.h:
+
+/usr/include/OGRE/OgreCompositorChain.h:
+
+/usr/include/OGRE/OgreCompositorInstance.h:
+
+/usr/include/OGRE/OgreCompositionTechnique.h:
+
+/usr/include/OGRE/OgreCompositionPass.h:
+
+/usr/include/OGRE/OgreCompositionTargetPass.h:
+
+/usr/include/OGRE/OgreWindowEventUtilities.h:
+
+/usr/include/OGRE/OgreShadowCameraSetupFocused.h:
+
+/usr/include/OGRE/OgrePolygon.h:
+
+/usr/include/OGRE/OgreConvexBody.h:
+
+/usr/include/OGRE/OgreShadowCameraSetupLiSPSM.h:
+
+/usr/include/OGRE/OgreShadowCameraSetupPlaneOptimal.h:
+
+/usr/include/OGRE/OgreShadowCameraSetupPSSM.h:
+
+../../MyGUIEngine/include/MyGUI_DelegateImplement.h:
+
+../../MyGUIEngine/include/MyGUI_Any.h:
+
+../../MyGUIEngine/include/MyGUI_IResource.h:
+
+../../MyGUIEngine/include/MyGUI_Rtti.h:
+
+../../MyGUIEngine/include/MyGUI_XmlDocument.h:
+
+../../MyGUIEngine/include/MyGUI_Convert.h:
+
+/usr/include/OGRE/OgreDataStream.h:
+
+/usr/include/OGRE/OgreUTFString.h:
+
+../../MyGUIEngine/include/MyGUI_Guid.h:
+
+../../MyGUIEngine/include/MyGUI_ActionController.h:
+
+../../MyGUIEngine/include/MyGUI_ControllerEdgeHide.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetDefines.h:
+
+../../MyGUIEngine/include/MyGUI_Enumerator.h:
+
+../../MyGUIEngine/include/MyGUI_ControllerItem.h:
+
+../../MyGUIEngine/include/MyGUI_ControllerFadeAlpha.h:
+
+../../MyGUIEngine/include/MyGUI_ControllerPosition.h:
+
+../../MyGUIEngine/include/MyGUI_CastWidget.h:
+
+../../MyGUIEngine/include/MyGUI_Widget.h:
+
+../../MyGUIEngine/include/MyGUI_ICroppedRectangle.h:
+
+../../MyGUIEngine/include/MyGUI_Align.h:
+
+../../MyGUIEngine/include/MyGUI_ISubWidgetRect.h:
+
+../../MyGUIEngine/include/MyGUI_ISubWidget.h:
+
+../../MyGUIEngine/include/MyGUI_DrawItem.h:
+
+../../MyGUIEngine/include/MyGUI_ISubWidgetText.h:
+
+../../MyGUIEngine/include/MyGUI_Colour.h:
+
+/usr/include/OGRE/OgreColourValue.h:
+
+../../MyGUIEngine/include/MyGUI_LayerItem.h:
+
+../../MyGUIEngine/include/MyGUI_LayerManager.h:
+
+../../MyGUIEngine/include/MyGUI_IUnlinkWidget.h:
+
+../../MyGUIEngine/include/MyGUI_ResourceManager.h:
+
+/usr/include/OGRE/OgreRenderQueueListener.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetUserData.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetEvent.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetToolTip.h:
+
+../../MyGUIEngine/include/MyGUI_IWidgetCreator.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetSkinInfo.h:
+
+../../MyGUIEngine/include/MyGUI_SubWidgetBinding.h:
+
+../../MyGUIEngine/include/MyGUI_ChildSkinInfo.h:
+
+../../MyGUIEngine/include/MyGUI_MaskPickInfo.h:
+
+../../MyGUIEngine/include/MyGUI_Canvas.h:
+
+../../MyGUIEngine/include/MyGUI_ResourceManager.h:
+
+../../MyGUIEngine/include/MyGUI_Gui.h:
+
+../../MyGUIEngine/include/MyGUI_WidgetOIS.h:
+
+/usr/include/OIS/OIS.h:
+
+/usr/include/OIS/OISPrereqs.h:
+
+/usr/include/OIS/OISConfig.h:
+
+/usr/include/OIS/OISObject.h:
+
+/usr/include/OIS/OISInterface.h:
+
+/usr/include/OIS/OISMouse.h:
+
+/usr/include/OIS/OISEvents.h:
+
+/usr/include/OIS/OISKeyboard.h:
+
+/usr/include/OIS/OISJoyStick.h:
+
+/usr/include/OIS/OISInputManager.h:
+
+/usr/include/OIS/OISFactoryCreator.h:
+
+/usr/include/OIS/OISException.h:
+
+/usr/include/OIS/OISEffect.h:
+
+/usr/include/OIS/OISForceFeedback.h:

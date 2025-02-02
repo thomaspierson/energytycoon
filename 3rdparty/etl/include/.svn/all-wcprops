@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/etl/!svn/ver/50/trunk/EditableTerrain/include
+END
+ETSplattingManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETSplattingManager.h
+END
+ETUpdatable.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETUpdatable.h
+END
+ETUtility.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETUtility.h
+END
+ETSplattingLayout.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETSplattingLayout.h
+END
+ETArray2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETArray2D.h
+END
+ETDynamicTexture.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETDynamicTexture.h
+END
+ETIndexHandler.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/etl/!svn/ver/44/trunk/EditableTerrain/include/ETIndexHandler.h
+END
+ETTerrainDescription.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETTerrainDescription.h
+END
+ETCompatibility.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETCompatibility.h
+END
+ETEditable.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETEditable.h
+END
+ETFlatTerrain.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETFlatTerrain.h
+END
+ETPage.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETPage.h
+END
+ETShaderGenerator.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETShaderGenerator.h
+END
+ETBrush.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETBrush.h
+END
+ETSplattingMaterial.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETSplattingMaterial.h
+END
+ETMovable.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/etl/!svn/ver/42/trunk/EditableTerrain/include/ETMovable.h
+END
+ETFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETFilter.h
+END
+ETMovableContainer.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/etl/!svn/ver/42/trunk/EditableTerrain/include/ETMovableContainer.h
+END
+ETCommon.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETCommon.h
+END
+ETMapGeneration.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETMapGeneration.h
+END
+ETAutoUpdater.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/etl/!svn/ver/50/trunk/EditableTerrain/include/ETAutoUpdater.h
+END
+ETSubDescription.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/etl/!svn/ver/41/trunk/EditableTerrain/include/ETSubDescription.h
+END
+ETPatch.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/etl/!svn/ver/48/trunk/EditableTerrain/include/ETPatch.h
+END
