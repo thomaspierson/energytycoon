@@ -676,7 +676,7 @@ mGUI->findWidget< MyGUI::List >("MissionsList")->eventListChangePosition +=
 	mGUI->findWidget< MyGUI::StaticText >("MapsText")->setCaption(StrLoc::get()->NewMenuMap());
 	mGUI->findWidget< MyGUI::StaticText >("MissionGoalsText")->setCaption(StrLoc::get()->NewMenuMissionGoals());
 
-	std::vector< std::string > lMissions = findFilesInDirectory(Constant::cDataDirPre() + "data/missions", false);
+	std::vector< std::string > lMissions = findFilesInDirectory(Constant::cShareDirPre() + "/data/missions", false);
 	std::vector< std::string > lMapsNonUnique;
 	std::vector< std::string > lMaps;
 
@@ -824,7 +824,7 @@ void GUI::newListPressed(MyGUI::ListBox* _sender, size_t index)
 
 		if (mGUI->findWidget< MyGUI::List >("MapsList")->getIndexSelected() != MyGUI::ITEM_NONE) {
 			std::vector< std::string > lMissions
-        = findFilesInDirectory(Constant::cDataDirPre() + "data/missions", false);
+        = findFilesInDirectory(Constant::cShareDirPre() + "/data/missions", false);
 			std::vector< std::string > lMissionsMap;
 
 			for (unsigned int i = 0; i < lMissions.size(); i++) {

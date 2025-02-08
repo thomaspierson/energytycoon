@@ -271,7 +271,7 @@ bool Company::buyObject(eCompanyObjectType pType, bool pFree)
 
 void Company::setupMissionParams(std::string pMission)
 {
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cShareDirPre()
 		+ "/data/missions/" + pMission).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);

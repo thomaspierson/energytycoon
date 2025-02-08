@@ -2,16 +2,64 @@
 #define SHARED_H
 
 #include <iostream>
+#include <filesystem>
 
-/*-----------------------------------------------------------------------------------------------*/
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <limits.h>
+#include <unistd.h>
+#endif
+
+
+namespace fs = std::filesystem;
+
+// Should come from CMake
+#ifndef SHARE_DIR
+#define SHARE_DIR "/usr/local/share/energytycoon"
+#endif
+
+// Should come from CMake
+#ifndef OGRE_MEDIA_DIR
+#define OGRE_MEDIA_DIR "/usr/hare/OGRE"
+#endif
+
 class Constant {
 public:
-	static std::string cDataDirPre() {
-		if (const char* env_p = std::getenv("ENERGYTYCOON_SHARE_PATH")) {
+	static std::filesystem::path execname()
+	{
+	#ifdef _WIN32
+		wchar_t path[MAX_PATH] = { 0 };
+		GetModuleFileNameW(NULL, path, MAX_PATH);
+		return path;
+	#else
+		char result[PATH_MAX];
+		ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+		return std::string(result, (count > 0) ? count : 0);
+	#endif
+	}
+
+	static std::string cShareDirPre() {
+		if (const char* env_p = std::getenv("ENERGYTYCOON_SHARE_DIR")) {
 			return std::string(env_p);
 		}
-		return std::string{ "/usr/share/games/energytycoon/"};
+		fs::path shareDir = SHARE_DIR;
+		std::vector<fs::path> dirs;
+
+		// Adding relative path from installed executable
+		dirs.push_back(execname().parent_path() / shareDir);
+		dirs.push_back(execname().parent_path().parent_path() / shareDir);
+
+		//  Loop through the paths and pick the first one that contain some data
+		for (auto d : dirs)
+		{	//  check if data dir and media dir are found
+			if (fs::exists(d / "data") && fs::is_directory(d / "media")) {
+				return std::string (d.string());
+			}
+		}
+		throw std::runtime_error("Could not find shared data directory");
 	}
+
 	static constexpr int cDemoSeconds = 900;
 };
 
@@ -369,8 +417,8 @@ static std::vector<std::string> getStartDataFromMission(std::string pMissionFile
                                                         std::string pLanguage)
 {
 	std::vector<std::string> lReturn;
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
-		+ "data/missions/" + pMissionFilename).c_str()));
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cShareDirPre()
+		+ "/data/missions/" + pMissionFilename).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);
 
@@ -404,8 +452,8 @@ static std::vector<std::string> getMissionGoalsFromMission(std::string pMissionF
                                                            std::string pNone)
 {
 	std::vector<std::string> lReturn;
-	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cDataDirPre()
-		+ "data/missions/" + pMissionFilename).c_str()));
+	boost::shared_ptr<TiXmlDocument> lMission(new TiXmlDocument((Constant::cShareDirPre()
+		+ "/data/missions/" + pMissionFilename).c_str()));
 
 	lMission->LoadFile(TIXML_ENCODING_UTF8);
 

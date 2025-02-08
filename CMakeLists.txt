@@ -147,18 +147,32 @@ SET(MyGUI_PLATFORM_LIBRARIES "MyGUI.OgrePlatform")
 
 target_link_libraries(${PROJECT_NAME} ${TinyXml_LIBRARIES} ${MyGUI_PLATFORM_LIBRARIES} ${MyGUI_LIBRARIES} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES})
 
+# Data installation path
+if (WIN32)
+	set(SHARE_INSTALL "."
+			CACHE STRING "Data file install path. Must be a relative path (from CMAKE_INSTALL_PREFIX), with no trailing slash.")
+else ()
+	if (NOT SHARE_INSTALL)
+		set(SHARE_INSTALL "share/games/energytycoon"
+				CACHE STRING "Data file install path. Must be a relative path (from CMAKE_INSTALL_PREFIX), with no trailing slash.")
+	endif ()
+endif ()
+mark_as_advanced(SHARE_INSTALL)
+add_definitions(-DSHARE_DIR="${SHARE_INSTALL}")
+
+# Set Ogre resource paths
+add_definitions(-DOGRE_MEDIA_DIR="${OGRE_MEDIA_DIR}")
+
 install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin
-	CONFIGURATIONS All)
-
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/media
-	DESTINATION ./
-	CONFIGURATIONS Release RelWithDebInfo Debug
 )
 
-install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins.cfg
-	${CMAKE_SOURCE_DIR}/dist/bin/resources.cfg
-	DESTINATION bin
-	CONFIGURATIONS Release RelWithDebInfo Debug
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/data
+	DESTINATION ${SHARE_INSTALL}
 )
-
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/media
+		DESTINATION ${SHARE_INSTALL}
+)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/config
+		DESTINATION ${SHARE_INSTALL}
+)

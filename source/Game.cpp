@@ -151,7 +151,7 @@ void Game::load(EventData* pData)
         lSavegame.reset(new TiXmlDocument((lSaveGameDirectory + "saved_games/"
           + lStartData.mSerializedFile + ".xml").c_str()));
       } else {
-        lSavegame.reset( new TiXmlDocument((Constant::cDataDirPre() + "data/saved_games/"
+        lSavegame.reset( new TiXmlDocument((Constant::cShareDirPre() + "/data/saved_games/"
           + getStartDataFromMission(lStartData.mMission,
           StrLoc::get()->MyGUILanguage())[2]).c_str()));
       }

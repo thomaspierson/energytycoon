@@ -124,7 +124,7 @@ void Application::restartGame(EventData* pData)
 
 void Application::setup(void)
 {
-  mRoot = OGRE_NEW Ogre::Root(Constant::cDataDirPre() + "/plugins.cfg", "", "");
+  mRoot = OGRE_NEW Ogre::Root(Constant::cShareDirPre() + "/config/plugins.cfg", "", "");
   setupResources();
 	parseSettings();
 
@@ -186,7 +186,7 @@ void Application::setup(void)
 void Application::setupResources(void)
 {
 	Ogre::ConfigFile lConfigFile;
-	lConfigFile.load(Constant::cDataDirPre() + "/resources.cfg");
+	lConfigFile.load(Constant::cShareDirPre() + "/config/resources.cfg");
 
     Ogre::ConfigFile::SectionIterator lSectionIterator =
 				lConfigFile.getSectionIterator();
@@ -201,7 +201,12 @@ void Application::setupResources(void)
 
         for(i = lSettings->begin(); i != lSettings->end(); ++i)  {
             lTypeName = i->first;
-            lArchName = i->second;
+        	Ogre::String name{};
+        	if (i->second == "ShadowVolume") {
+					lArchName = std::string(OGRE_MEDIA_DIR) + "/" + i->second;
+        	} else {
+        		lArchName = Constant::cShareDirPre() + "/" + i->second;
+        	}
             Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
                 lArchName, lTypeName, lSectionName);
         }
@@ -219,7 +224,7 @@ void Application::loadResources(void)
 
 void Application::parseSettings(void)
 {
-	std::ifstream lFile(Constant::cDataDirPre() + "/config.cfg");
+	std::ifstream lFile(Constant::cShareDirPre() + "/config/config.cfg");
 	std::string lBuffer;
 
 	while (getline(lFile, lBuffer)) {
@@ -304,12 +309,12 @@ int __stdcall WinMain(HINSTANCE pInstance, HINSTANCE, char* ,int)
 int main(int, char**)
 #endif
 {
-	GameConfig::load(Constant::cDataDirPre() + "/game.cfg");
+	GameConfig::load(Constant::cShareDirPre() + "/config/game.cfg");
 
 #ifdef WIN32
 	DWORD lFileAttributes;
 
-	lFileAttributes = GetFileAttributes(Constant::cDataDirPre() + "/lang.cfg");
+	lFileAttributes = GetFileAttributes(Constant::cDataDirPre() + "/config/lang.cfg");
 	if (lFileAttributes == 0xFFFFFFFF) {
 		DialogBox(pInstance, MAKEINTRESOURCE(IDD_LANGUAGECHOOSER),
 			0, reinterpret_cast<DLGPROC>(LangChooserProc));
@@ -329,7 +334,7 @@ int main(int, char**)
 
 	std::ifstream lFile;
 
-	lFile.open(Constant::cDataDirPre() + "/lang.cfg");
+	lFile.open(Constant::cShareDirPre() + "/config/lang.cfg");
 
 	std::string lLanguage;
 	lFile >> lLanguage;

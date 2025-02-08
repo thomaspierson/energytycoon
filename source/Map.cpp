@@ -48,7 +48,7 @@ Map::Map(std::string pMapPrefix, Ogre::SceneManager* pSceneManager)
 	EventHandler::raiseEvent(eSetLoadingStatus, new EventArg<std::string>(
 		StrLoc::get()->LoadingPopulace()));
 
-	mMapXML.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/" + pMapPrefix + "_data.xml").c_str()));
+	mMapXML.reset(new TiXmlDocument((Constant::cShareDirPre() + "/data/maps/" + pMapPrefix + "_data.xml").c_str()));
 	mMapXML->LoadFile(TIXML_ENCODING_UTF8);
 	processXML();
 
@@ -512,7 +512,7 @@ void Map::evaluateScaleFactors(std::string pMapPrefix)
 	boost::shared_ptr< TiXmlDocument > lTerrainConfig;
 	TiXmlNode* rootNode;
 
-	lTerrainConfig.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/"
+	lTerrainConfig.reset(new TiXmlDocument((Constant::cShareDirPre() + "/data/maps/"
 		+ pMapPrefix + "_terrain.xml").c_str()));
 	lTerrainConfig->LoadFile(TIXML_ENCODING_UTF8);
 

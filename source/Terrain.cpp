@@ -160,7 +160,7 @@ void Terrain::evaluateParams(void)
 	boost::shared_ptr<TiXmlDocument> lTerrainConfig;
 	TiXmlNode* rootNode;
 
-	lTerrainConfig.reset(new TiXmlDocument((Constant::cDataDirPre() + "data/maps/"  + mMapPrefix +
+	lTerrainConfig.reset(new TiXmlDocument((Constant::cShareDirPre() + "/data/maps/"  + mMapPrefix +
     "_terrain.xml").c_str()));
 
 	lTerrainConfig->LoadFile(TIXML_ENCODING_UTF8);
