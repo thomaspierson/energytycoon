@@ -1,10 +1,14 @@
-cmake_minimum_required(VERSION 2.16.0)
+cmake_minimum_required(VERSION 3.10.0)
 
 set(PROJECT_NAME "energytycoon")
 
 include(FindPkgConfig)
 
-project(${PROJECT_NAME} CXX C)
+# TODO handle version using git describe and pass it to the C++ via preprocessor
+project(${PROJECT_NAME}
+		VERSION 0.0.0
+		DESCRIPTION "game to build up and manage a large electricity company"
+		LANGUAGES CXX C)
 
 if (WIN32)
     set(Boost_USE_STATIC_LIBS TRUE)
@@ -176,3 +180,8 @@ install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/media
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/config
 		DESTINATION ${SHARE_INSTALL}
 )
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+message(STATUS "CMake module path: ${CMAKE_MODULE_PATH}")
+
+include(Packaging)
