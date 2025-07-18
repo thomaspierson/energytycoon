@@ -39,6 +39,32 @@ public:
 	#endif
 	}
 
+	/**
+	 * @brief Return config dir of energytycoon located in home directory.
+	 * @note If it doesn't exist, it creates it.
+	 * @todo This is only working on linux, needs to implement the windows equivalent.
+	 * @return fs::path config dir of energytycoon
+	 */
+	static fs::path cHomeConfigDir() {
+		const char* env_p = std::getenv("HOME");
+		if (env_p == nullptr) {
+			throw std::runtime_error("HOME directory not set");
+		}
+		fs::path homeDir(env_p);
+		fs::path configHomeDir(homeDir / ".config");
+		if (fs::exists(configHomeDir) && !fs::is_directory(configHomeDir)) {
+			throw std::runtime_error("~/.config is not a directory!");
+		}
+		else if (!fs::exists(configHomeDir)) {
+			fs::create_directory(configHomeDir);
+		}
+		fs::path configDir = configHomeDir / "energytycoon";
+		if (!fs::exists(configDir)) {
+			fs::create_directory(configDir);
+		}
+		return configDir;
+	}
+
 	static std::string cShareDirPre() {
 		if (const char* env_p = std::getenv("ENERGYTYCOON_SHARE_DIR")) {
 			return std::string(env_p);

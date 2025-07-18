@@ -29,8 +29,17 @@ void GUI::menuExitPressed(MyGUI::WidgetPtr _widget)
 
 void GUI::questionExit(MyGUI::Message* _sender, MyGUI::MessageBoxStyle _style)
 {
-	if(_style == MyGUI::MessageBoxStyle::Yes)
-		exit(0);
+	if(_style == MyGUI::MessageBoxStyle::Yes) {
+		if(mRoot != nullptr)
+		{
+			// Call shutdown on Ogre root object to have clean exit process (ex: restoring original screen resolution).
+			mRoot->shutdown();
+			delete mRoot;
+			mRoot = nullptr;
+			// @todo This is dirty and needs to be rework to have clean program exit procedure
+			exit(0);
+		}
+	}
 }
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -93,15 +102,6 @@ void GUI::menuCreditsPressed(MyGUI::WidgetPtr _widget)
 
 void GUI::menuOptionsPressed(MyGUI::WidgetPtr _widget)
 {
-  // fade out hack
-  unsigned long lStartTime = mRoot->getTimer()->getMilliseconds();
-  unsigned long lPassedTime = 0;
-
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("MainMenuWidget")->setAlpha(1.0 - (float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
 
 	MyGUI::LayoutManager::getInstance().unloadLayout(mCurrentLayout);
 
@@ -188,7 +188,9 @@ void GUI::menuOptionsPressed(MyGUI::WidgetPtr _widget)
 	mGUI->findWidget<MyGUI::StaticText>("DisplayModeText")->
 		setCaption(StrLoc::get()->OptionsMenuDisplayMode());
 
-	std::ifstream lFile("config.cfg");
+	// Get local config dir from home dir and open the user config.cfg.
+	auto homeConfigDir = Constant::cHomeConfigDir() / "config.cfg";
+	std::ifstream lFile(homeConfigDir.string());
 	std::string lBuffer;
 
 	while(getline(lFile, lBuffer)) {
@@ -208,18 +210,6 @@ void GUI::menuOptionsPressed(MyGUI::WidgetPtr _widget)
 	}
 
 	lFile.close();
-
-  // fade in hack
-  lStartTime = mRoot->getTimer()->getMilliseconds();
-  lPassedTime = 0;
-
-  while (lPassedTime < 100) {
-    mGUI->findWidget<MyGUI::Widget>("OptionsWidget")->setAlpha((float)lPassedTime/100.0);
-    mRoot->renderOneFrame();
-    lPassedTime = mRoot->getTimer()->getMilliseconds() - lStartTime;
-  }
-
-  mGUI->findWidget<MyGUI::Widget>("OptionsWidget")->setAlpha(1.0);
 }
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -247,8 +237,10 @@ void GUI::optionsButtonPressed(MyGUI::WidgetPtr _widget)
 			mRenderSystem->setConfigOption("Full Screen", mNewFullscreen);
 			//mRenderSystem->setConfigOption("Colour Depth", mNewBPP);
 
+			// Get local config dir from home dir and open/create the user config.cfg.
 			std::ofstream lConfigFile;
-			lConfigFile.open ("config.cfg");
+			auto homeConfigDir = Constant::cHomeConfigDir() / "config.cfg";
+			lConfigFile.open (homeConfigDir.string());
 			lConfigFile << "Video Mode=" + mNewResolution << std::endl;
 			lConfigFile << "Full Screen=" + mNewFullscreen << std::endl;
 			lConfigFile << "Quality=" + mNewQuality << std::endl;
@@ -270,14 +262,15 @@ void GUI::optionsButtonPressed(MyGUI::WidgetPtr _widget)
 
                 renderManager.getRenderWindow()->reposition((lDesktopWidth-lWidth)/2,(lDesktopHeight-lHeight)/2);
 #else
-        renderManager.getRenderWindow()->reposition(0,0);
+				renderManager.getRenderWindow()->reposition(0,0);
 #endif
 			}
-
+			// @todo Issue when applying the new screen resolution on linux, UI is broken. After restart new resolution
+			// is taken into account properly.
 			EventHandler::raiseEvent(eGraphicOptionsChange);
 		}
 
-    mOptionsChanged = true;
+		mOptionsChanged = true;
 		switchToMainMenu();
 		mMainMenuLock = 5;
 	}

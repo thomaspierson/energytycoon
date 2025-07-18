@@ -156,10 +156,24 @@ void Application::setup(void)
    mLastWindowWidth = lDesktopRect.right;
    mLastWindowHeight = lDesktopRect.bottom;
 #else
-    // todo: retrieve linux desktop size
+	  auto CurrentRendererOptions = lRenderSystem->getConfigOptions();
+	  Ogre::ConfigOptionMap::iterator configItr = CurrentRendererOptions.begin();
+	  Ogre::StringVector lFoundResolutions{};
+	  for (auto &option: CurrentRendererOptions) {
+		  if (option.first == "Video Mode") {
+			  lFoundResolutions = option.second.possibleValues;
+		  }
+	  }
+	  auto lastResolution = lFoundResolutions.back();
+	  size_t pos = lastResolution.find(" x ");
+	  if (pos != Ogre::String::npos) {
+		  Ogre::String widthStr = lastResolution.substr(0, pos);
+		  Ogre::String heightStr = lastResolution.substr(pos + 3);
+		  mLastWindowWidth = Ogre::StringConverter::parseInt(widthStr);
+		  mLastWindowHeight = Ogre::StringConverter::parseInt(heightStr);
+	  }
 #endif
   }
-
 	lRenderSystem->setConfigOption("Full Screen", mLastFullscreen ? "Yes" : "No");
 	lRenderSystem->setConfigOption("Video Mode", toString(mLastWindowWidth) + " x "
 		+ toString(mLastWindowHeight));
@@ -224,7 +238,18 @@ void Application::loadResources(void)
 
 void Application::parseSettings(void)
 {
-	std::ifstream lFile(Constant::cShareDirPre() + "/config/config.cfg");
+	std::string sFile{};
+	// if a config file exist in home_dir/.config/energytycoon we use it
+	auto homeConfigDir = Constant::cHomeConfigDir() / "config.cfg";
+	if (fs::exists(homeConfigDir)) {
+		sFile = homeConfigDir.string();
+	}
+	// if not then we use the default config file inside installation folder
+	else {
+		sFile = Constant::cShareDirPre() + "/config/config.cfg";
+	}
+	std::cout << "Config file parsing: " << sFile << std::endl;
+	std::ifstream lFile(sFile);
 	std::string lBuffer;
 
 	while (getline(lFile, lBuffer)) {
